@@ -1,0 +1,101 @@
+index,a_name,a_form,a_tier,b_name,b_form,b_tier,winner
+200,Krillin,Super Hero Arc / Destructo Disc,97.0,Chrollo Lucilfer,Skill Hunter Peak,13.0,1.0
+201,Yuno,Spirit of Zephyr / Spirit Dive,29.68,Invincible,Post-Resurrections (Comics),36.02,0.0
+202,Muzan,True Form,16.92,Gohan,Beast Form / Super Hero Arc,97.0,0.0
+203,Might Guy,Eight Gates,33.3,Yami Sukehiro,Death Thrust / Final War,27.18,0.0
+204,Thragg,Post-Timeskip (Comics),36.02,Homelander,V1 (Comics),8.17,1.0
+205,King,Full Wings / Form One,57.8,Invincible,Post-Resurrections (Comics),36.02,0.0
+206,Future Trunks,Sword of Hope / Zamasu Fight,97.0,Thor,Rune King Thor (Comics),99.25,0.0
+207,Naruto Uzumaki,Baryon Mode,51.38,Asta,Perfect Devil Union / Zetten,31.33,1.0
+208,Gohan,Beast Form / Super Hero Arc,97.0,Merlin,Infinity Active,57.8,1.0
+209,Kurapika,Yorknew City Arc / Emperor Time,12.12,King,Full Wings / Form One,57.8,0.0
+210,Megumi Fushiguro,Mahoraga,15.12,Adult Gon,Adult Form,17.02,1.0
+211,Lucifero,True Form,27.18,Isaac Netero,Zero Hand Active,17.02,1.0
+212,Mahito,True form,12.12,Killua Zoldyck,Godspeed,13.0,1.0
+213,Yami Sukehiro,Death Thrust / Final War,27.18,Hisoka Morow,Ryu and Ko,13.0,1.0
+214,All For One,Rewind Drug / Omni-Factor,24.12,Battle Beast,Final Battle Peak (Comics),36.02,0.0
+215,Feitan Portor,Pain Packer,13.0,Homelander,V1 (Comics),8.17,0.0
+216,Madara Uchiha,Jubi Jinchuriki (Shinju Absorbed),34.7,Gohan,Beast Form / Super Hero Arc,97.0,0.0
+217,Isaac Netero,Zero Hand Active,17.02,Ban,Post-Purgatory with Snatch,57.8,0.0
+218,Sasuke Uchiha,New Era / Susano'o,34.7,Vegeta,Ultra Ego / Granolah Arc Peak,97.0,0.0
+219,Vegeta,Ultra Ego / Granolah Arc Peak,97.0,Yuno,Spirit of Zephyr / Spirit Dive,29.68,1.0
+220,Megumi Fushiguro,Mahoraga,15.12,Kurapika,Yorknew City Arc / Emperor Time,12.12,1.0
+221,Gon Freecss,Ryu and Ko,13.0,Supreme Deity,Full Power,51.38,0.0
+222,Itachi Uchiha,Edo Tensei,24.12,Katsuki Bakugo,Cluster / Plus Ultra,23.04,1.0
+223,Muzan,True Form,16.92,Cell,Perfect Form,51.38,0.0
+224,Katsuki Bakugo,Cluster / Plus Ultra,23.04,Feitan Portor,Pain Packer,13.0,0.0
+225,Naruto Uzumaki,Baryon Mode,51.38,Julius Novachrono,Wizard King Peak,19.94,0.0
+226,Muzan,True Form,16.92,Might Guy,Eight Gates,33.3,0.0
+227,Gohan,Beast Form / Super Hero Arc,97.0,Meliodas,True Magic Form,57.8,0.0
+228,Kakashi Hatake,DMS (Dual Mangekyo Sharingan),31.33,Isaac Netero,Zero Hand Active,17.02,0.0
+229,Kakashi Hatake,DMS (Dual Mangekyo Sharingan),31.33,Chaos,Primordial Entity,96.0,0.0
+230,Krillin,Super Hero Arc / Destructo Disc,97.0,Frieza,Black Frieza Form,97.0,0.0
+231,All For One,Rewind Drug / Omni-Factor,24.12,Diane,Post-Training / Gideon,51.38,0.0
+232,Mahito,True form,12.12,Minato Namikaze,Edo Tensei,27.18,1.0
+233,Sasuke Uchiha,New Era / Susano'o,34.7,Future Trunks,Sword of Hope / Zamasu Fight,97.0,0.0
+234,Toji Fushiguro,Peak Form,15.12,All Might,Prime,27.18,0.0
+235,Megumi Fushiguro,Mahoraga,15.12,Asta,Perfect Devil Union / Zetten,31.33,0.0
+236,Merlin,Infinity Active,57.8,Omni-Man,Final Battle Peak (Comics),31.33,0.0
+237,Ryomen Sukuna,True Form / Full Power,17.02,Invincible,Post-Resurrections (Comics),36.02,0.0
+238,Sasuke Uchiha,New Era / Susano'o,34.7,Tomura Shigaraki,Post-Surgery / Complete,25.77,1.0
+239,Nanami Kento,Shibuya Incident Peak,12.12,Isaac Netero,Zero Hand Active,17.02,0.0
+240,Yuji Itadori,Complete Sukuna Gauntlet Peak,15.12,Izuku Midoriya,Fa Jin / Gearshift / Full cowl,27.18,1.0
+241,Piccolo,Orange Form / Super Hero Arc,97.0,Kurapika,Yorknew City Arc / Emperor Time,12.12,1.0
+242,Goku,MUI (Perfected Ultra Instinct),97.0,Homelander,V1 (Comics),8.17,1.0
+243,Geto Suguru,Curse Manipulation / Adult,15.12,Isaac Netero,Zero Hand Active,17.02,0.0
+244,Noelle Silva,Saint Valkyrie / Spirit Dive,29.59,Chrollo Lucilfer,Skill Hunter Peak,13.0,1.0
+245,Naruto Uzumaki,Baryon Mode,51.38,Lucifero,True Form,27.18,0.0
+246,Tomura Shigaraki,Post-Surgery / Complete,25.77,Ban,Post-Purgatory with Snatch,57.8,0.0
+247,Goku,MUI (Perfected Ultra Instinct),97.0,Asta,Perfect Devil Union / Zetten,31.33,1.0
+248,Minato Namikaze,Edo Tensei,27.18,Shoto Todoroki,Flashfreeze Heatwave,23.04,1.0
+249,Ryomen Sukuna,True Form / Full Power,17.02,Madara Uchiha,Jubi Jinchuriki (Shinju Absorbed),34.7,0.0
+250,Krillin,Super Hero Arc / Destructo Disc,97.0,Atom Eve,Second Resurrection (Comics),31.33,0.0
+251,Sasuke Uchiha,New Era / Susano'o,34.7,King,Full Wings / Form One,57.8,0.0
+252,Megumi Fushiguro,Mahoraga,15.12,Atom Eve,Second Resurrection (Comics),31.33,0.0
+253,Killua Zoldyck,Godspeed,13.0,Escanor,The One Ultimate,57.8,0.0
+254,Zeldris,3rd Demon Mark,57.8,Thor,Rune King Thor (Comics),99.25,0.0
+255,Isaac Netero,Zero Hand Active,17.02,Invincible,Post-Resurrections (Comics),36.02,0.0
+256,Star and Stripe,New Order Active,24.12,Yami Sukehiro,Death Thrust / Final War,27.18,0.0
+257,Tomura Shigaraki,Post-Surgery / Complete,25.77,Asta,Perfect Devil Union / Zetten,31.33,1.0
+258,Hashirama Senju,Sage Mode / War Arc,29.59,Asta,Perfect Devil Union / Zetten,31.33,0.0
+259,Kakashi Hatake,DMS (Dual Mangekyo Sharingan),31.33,Asta,Perfect Devil Union / Zetten,31.33,0.0
+260,Chrollo Lucilfer,Skill Hunter Peak,13.0,Invincible,Post-Resurrections (Comics),36.02,0.0
+261,Meliodas,True Magic Form,57.8,Allen the Alien,Second Evolution (Comics),32.9,0.0
+262,Might Guy,Eight Gates,33.3,All Might,Prime,27.18,1.0
+263,Madara Uchiha,Jubi Jinchuriki (Shinju Absorbed),34.7,Hulk,Devil Hulk (Comics),94.5,0.0
+264,Noelle Silva,Saint Valkyrie / Spirit Dive,29.59,Adult Gon,Adult Form,17.02,1.0
+265,Toji Fushiguro,Peak Form,15.12,Adult Gon,Adult Form,17.02,0.0
+266,Gohan,Beast Form / Super Hero Arc,97.0,Lucifero,True Form,27.18,1.0
+267,Itachi Uchiha,Edo Tensei,24.12,Vegeta,Ultra Ego / Granolah Arc Peak,97.0,0.0
+268,All Might,Prime,27.18,Adult Gon,Adult Form,17.02,0.0
+269,Itachi Uchiha,Edo Tensei,24.12,Zeldris,3rd Demon Mark,57.8,0.0
+270,Madara Uchiha,Jubi Jinchuriki (Shinju Absorbed),34.7,Chrollo Lucilfer,Skill Hunter Peak,13.0,1.0
+271,Toji Fushiguro,Peak Form,15.12,Kakashi Hatake,DMS (Dual Mangekyo Sharingan),31.33,0.0
+272,Izuku Midoriya,Fa Jin / Gearshift / Full cowl,27.18,Yami Sukehiro,Death Thrust / Final War,27.18,0.0
+273,Isaac Netero,Zero Hand Active,17.02,Allen the Alien,Second Evolution (Comics),32.9,0.0
+274,Noelle Silva,Saint Valkyrie / Spirit Dive,29.59,Battle Beast,Final Battle Peak (Comics),36.02,0.0
+275,Ryomen Sukuna,True Form / Full Power,17.02,Shoto Todoroki,Flashfreeze Heatwave,23.04,1.0
+276,Tomura Shigaraki,Post-Surgery / Complete,25.77,Supreme Deity,Full Power,51.38,0.0
+277,Madara Uchiha,Jubi Jinchuriki (Shinju Absorbed),34.7,Julius Novachrono,Wizard King Peak,19.94,1.0
+278,Future Trunks,Sword of Hope / Zamasu Fight,97.0,Hisoka Morow,Ryu and Ko,13.0,1.0
+279,Itachi Uchiha,Edo Tensei,24.12,Allen the Alien,Second Evolution (Comics),32.9,0.0
+280,Satoru Gojo,Shinjuku Showdown Arc,17.02,Tomura Shigaraki,Post-Surgery / Complete,25.77,1.0
+281,Hashirama Senju,Sage Mode / War Arc,29.59,All For One,Rewind Drug / Omni-Factor,24.12,1.0
+282,Frieza,Black Frieza Form,97.0,Kurapika,Yorknew City Arc / Emperor Time,12.12,1.0
+283,Vegeta,Ultra Ego / Granolah Arc Peak,97.0,Battle Beast,Final Battle Peak (Comics),36.02,1.0
+284,Megumi Fushiguro,Mahoraga,15.12,Kaguya Otsutsuki,Truth Seeker Orbs,51.38,0.0
+285,Izuku Midoriya,Fa Jin / Gearshift / Full cowl,27.18,Escanor,The One Ultimate,57.8,0.0
+286,Might Guy,Eight Gates,33.3,Allen the Alien,Second Evolution (Comics),32.9,0.0
+287,Cell,Perfect Form,51.38,King,Full Wings / Form One,57.8,1.0
+288,Adult Gon,Adult Form,17.02,Kurapika,Yorknew City Arc / Emperor Time,12.12,1.0
+289,Megumi Fushiguro,Mahoraga,15.12,King,Full Wings / Form One,57.8,0.0
+290,Might Guy,Eight Gates,33.3,Vegeta,Ultra Ego / Granolah Arc Peak,97.0,0.0
+291,Gon Freecss,Ryu and Ko,13.0,Omni-Man,Final Battle Peak (Comics),31.33,0.0
+292,Thor,Rune King Thor (Comics),99.25,Hulk,Devil Hulk (Comics),94.5,1.0
+293,Satoru Gojo,Shinjuku Showdown Arc,17.02,Battle Beast,Final Battle Peak (Comics),36.02,0.0
+294,Itachi Uchiha,Edo Tensei,24.12,Tomura Shigaraki,Post-Surgery / Complete,25.77,1.0
+295,Katsuki Bakugo,Cluster / Plus Ultra,23.04,Escanor,The One Ultimate,57.8,0.0
+296,Kakashi Hatake,DMS (Dual Mangekyo Sharingan),31.33,Frieza,Black Frieza Form,97.0,0.0
+297,Obito Uchiha,Jubi Jinchuriki,31.33,Hashirama Senju,Sage Mode / War Arc,29.59,1.0
+298,Feitan Portor,Pain Packer,13.0,Merlin,Infinity Active,57.8,0.0
+299,All Might,Prime,27.18,Meruem,Post-Rose / Great King,18.12,0.0

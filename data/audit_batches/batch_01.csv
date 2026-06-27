@@ -1,0 +1,101 @@
+index,a_name,a_form,a_tier,b_name,b_form,b_tier,winner
+0,Shoto Todoroki,Flashfreeze Heatwave,23.04,Goku,MUI (Perfected Ultra Instinct),97.0,0.0
+1,Yuji Itadori,Complete Sukuna Gauntlet Peak,15.12,Vegeta,Ultra Ego / Granolah Arc Peak,97.0,0.0
+2,Julius Novachrono,Wizard King Peak,19.94,Thragg,Post-Timeskip (Comics),36.02,0.0
+3,Madara Uchiha,Jubi Jinchuriki (Shinju Absorbed),34.7,Vegeta,Ultra Ego / Granolah Arc Peak,97.0,0.0
+4,Nanami Kento,Shibuya Incident Peak,12.12,Cell,Perfect Form,51.38,0.0
+5,Kurapika,Yorknew City Arc / Emperor Time,12.12,Chaos,Primordial Entity,96.0,0.0
+6,Satoru Gojo,Shinjuku Showdown Arc,17.02,Ryomen Sukuna,True Form / Full Power,17.02,0.0
+7,Yuji Itadori,Complete Sukuna Gauntlet Peak,15.12,Obito Uchiha,Jubi Jinchuriki,31.33,0.0
+8,Hashirama Senju,Sage Mode / War Arc,29.59,Future Trunks,Sword of Hope / Zamasu Fight,97.0,0.0
+9,Geto Suguru,Curse Manipulation / Adult,15.12,Tomura Shigaraki,Post-Surgery / Complete,25.77,0.0
+10,Gohan,Beast Form / Super Hero Arc,97.0,Thor,Rune King Thor (Comics),99.25,0.0
+11,Ryomen Sukuna,True Form / Full Power,17.02,Katsuki Bakugo,Cluster / Plus Ultra,23.04,1.0
+12,Naruto Uzumaki,Baryon Mode,51.38,Piccolo,Orange Form / Super Hero Arc,97.0,0.0
+13,Yuji Itadori,Complete Sukuna Gauntlet Peak,15.12,Homelander,V1 (Comics),8.17,1.0
+14,Itachi Uchiha,Edo Tensei,24.12,Izuku Midoriya,Fa Jin / Gearshift / Full cowl,27.18,1.0
+15,Star and Stripe,New Order Active,24.12,Frieza,Black Frieza Form,97.0,0.0
+16,Supreme Deity,Full Power,51.38,Hulk,Devil Hulk (Comics),94.5,1.0
+17,Meruem,Post-Rose / Great King,18.12,Omni-Man,Final Battle Peak (Comics),31.33,0.0
+18,Killua Zoldyck,Godspeed,13.0,Omni-Man,Final Battle Peak (Comics),31.33,0.0
+19,Cell,Perfect Form,51.38,Meliodas,True Magic Form,57.8,1.0
+20,Frieza,Black Frieza Form,97.0,Zeldris,3rd Demon Mark,57.8,1.0
+21,Yami Sukehiro,Death Thrust / Final War,27.18,Chaos,Primordial Entity,96.0,0.0
+22,Toji Fushiguro,Peak Form,15.12,Meliodas,True Magic Form,57.8,0.0
+23,Minato Namikaze,Edo Tensei,27.18,Katsuki Bakugo,Cluster / Plus Ultra,23.04,1.0
+24,Diane,Post-Training / Gideon,51.38,Estarossa,Post-Commandment Absorption,51.38,0.0
+25,Yuji Itadori,Complete Sukuna Gauntlet Peak,15.12,Toji Fushiguro,Peak Form,15.12,1.0
+26,Cell,Perfect Form,51.38,Yami Sukehiro,Death Thrust / Final War,27.18,1.0
+27,Cell,Perfect Form,51.38,Battle Beast,Final Battle Peak (Comics),36.02,1.0
+28,Megumi Fushiguro,Mahoraga,15.12,All For One,Rewind Drug / Omni-Factor,24.12,0.0
+29,Mahito,True form,12.12,Feitan Portor,Pain Packer,13.0,1.0
+30,Obito Uchiha,Jubi Jinchuriki,31.33,Minato Namikaze,Edo Tensei,27.18,1.0
+31,Megumi Fushiguro,Mahoraga,15.12,Homelander,V1 (Comics),8.17,1.0
+32,Kaguya Otsutsuki,Truth Seeker Orbs,51.38,Krillin,Super Hero Arc / Destructo Disc,97.0,0.0
+33,All For One,Rewind Drug / Omni-Factor,24.12,Gowther,Emotions Restored,51.38,0.0
+34,Future Trunks,Sword of Hope / Zamasu Fight,97.0,Kurapika,Yorknew City Arc / Emperor Time,12.12,1.0
+35,Hashirama Senju,Sage Mode / War Arc,29.59,Tomura Shigaraki,Post-Surgery / Complete,25.77,1.0
+36,Krillin,Super Hero Arc / Destructo Disc,97.0,Gowther,Emotions Restored,51.38,0.0
+37,Nanami Kento,Shibuya Incident Peak,12.12,Kakashi Hatake,DMS (Dual Mangekyo Sharingan),31.33,0.0
+38,Mahito,True form,12.12,Julius Novachrono,Wizard King Peak,19.94,0.0
+39,Yuji Itadori,Complete Sukuna Gauntlet Peak,15.12,Lucifero,True Form,27.18,0.0
+40,Isaac Netero,Zero Hand Active,17.02,Escanor,The One Ultimate,57.8,0.0
+41,Toji Fushiguro,Peak Form,15.12,Hisoka Morow,Ryu and Ko,13.0,1.0
+42,Itachi Uchiha,Edo Tensei,24.12,Gowther,Emotions Restored,51.38,0.0
+43,Piccolo,Orange Form / Super Hero Arc,97.0,Battle Beast,Final Battle Peak (Comics),36.02,0.0
+44,Sasuke Uchiha,New Era / Susano'o,34.7,Killua Zoldyck,Godspeed,13.0,1.0
+45,Ban,Post-Purgatory with Snatch,57.8,Omni-Man,Final Battle Peak (Comics),31.33,0.0
+46,Lucifero,True Form,27.18,Atom Eve,Second Resurrection (Comics),31.33,1.0
+47,All For One,Rewind Drug / Omni-Factor,24.12,Ban,Post-Purgatory with Snatch,57.8,0.0
+48,Sasuke Uchiha,New Era / Susano'o,34.7,Estarossa,Post-Commandment Absorption,51.38,0.0
+49,Madara Uchiha,Jubi Jinchuriki (Shinju Absorbed),34.7,Ban,Post-Purgatory with Snatch,57.8,1.0
+50,Supreme Deity,Full Power,51.38,Invincible,Post-Resurrections (Comics),36.02,0.0
+51,Itachi Uchiha,Edo Tensei,24.12,Frieza,Black Frieza Form,97.0,0.0
+52,Naruto Uzumaki,Baryon Mode,51.38,Chrollo Lucilfer,Skill Hunter Peak,13.0,1.0
+53,Satoru Gojo,Shinjuku Showdown Arc,17.02,Gohan,Beast Form / Super Hero Arc,97.0,0.0
+54,Asta,Perfect Devil Union / Zetten,31.33,Killua Zoldyck,Godspeed,13.0,1.0
+55,Isaac Netero,Zero Hand Active,17.02,Thor,Rune King Thor (Comics),99.25,0.0
+56,Lucifero,True Form,27.18,Thor,Rune King Thor (Comics),99.25,0.0
+57,Yuno,Spirit of Zephyr / Spirit Dive,29.68,Omni-Man,Final Battle Peak (Comics),31.33,0.0
+58,Toji Fushiguro,Peak Form,15.12,Diane,Post-Training / Gideon,51.38,0.0
+59,Sasuke Uchiha,New Era / Susano'o,34.7,Star and Stripe,New Order Active,24.12,1.0
+60,Krillin,Super Hero Arc / Destructo Disc,97.0,Homelander,V1 (Comics),8.17,1.0
+61,Kurapika,Yorknew City Arc / Emperor Time,12.12,Diane,Post-Training / Gideon,51.38,0.0
+62,Yuno,Spirit of Zephyr / Spirit Dive,29.68,Battle Beast,Final Battle Peak (Comics),36.02,0.0
+63,Geto Suguru,Curse Manipulation / Adult,15.12,Muzan,True Form,16.92,0.0
+64,Satoru Gojo,Shinjuku Showdown Arc,17.02,Estarossa,Post-Commandment Absorption,51.38,1.0
+65,Madara Uchiha,Jubi Jinchuriki (Shinju Absorbed),34.7,Piccolo,Orange Form / Super Hero Arc,97.0,0.0
+66,Minato Namikaze,Edo Tensei,27.18,Goku,MUI (Perfected Ultra Instinct),97.0,0.0
+67,Might Guy,Eight Gates,33.3,Gon Freecss,Ryu and Ko,13.0,1.0
+68,Muzan,True Form,16.92,Chrollo Lucilfer,Skill Hunter Peak,13.0,1.0
+69,Geto Suguru,Curse Manipulation / Adult,15.12,Killua Zoldyck,Godspeed,13.0,1.0
+70,Cell,Perfect Form,51.38,Supreme Deity,Full Power,51.38,0.0
+71,Satoru Gojo,Shinjuku Showdown Arc,17.02,Izuku Midoriya,Fa Jin / Gearshift / Full cowl,27.18,1.0
+72,Madara Uchiha,Jubi Jinchuriki (Shinju Absorbed),34.7,Shoto Todoroki,Flashfreeze Heatwave,23.04,1.0
+73,All Might,Prime,27.18,Goku,MUI (Perfected Ultra Instinct),97.0,0.0
+74,Kaguya Otsutsuki,Truth Seeker Orbs,51.38,Goku,MUI (Perfected Ultra Instinct),97.0,0.0
+75,Shoto Todoroki,Flashfreeze Heatwave,23.04,Vegeta,Ultra Ego / Granolah Arc Peak,97.0,0.0
+76,Toji Fushiguro,Peak Form,15.12,Vegeta,Ultra Ego / Granolah Arc Peak,97.0,0.0
+77,All Might,Prime,27.18,Estarossa,Post-Commandment Absorption,51.38,0.0
+78,Star and Stripe,New Order Active,24.12,Ban,Post-Purgatory with Snatch,57.8,0.0
+79,Might Guy,Eight Gates,33.3,King,Full Wings / Form One,57.8,0.0
+80,Omni-Man,Final Battle Peak (Comics),31.33,Allen the Alien,Second Evolution (Comics),32.9,0.0
+81,Goku,MUI (Perfected Ultra Instinct),97.0,Chrollo Lucilfer,Skill Hunter Peak,13.0,1.0
+82,Supreme Deity,Full Power,51.38,Battle Beast,Final Battle Peak (Comics),36.02,0.0
+83,Killua Zoldyck,Godspeed,13.0,Isaac Netero,Zero Hand Active,17.02,0.0
+84,Izuku Midoriya,Fa Jin / Gearshift / Full cowl,27.18,Battle Beast,Final Battle Peak (Comics),36.02,0.0
+85,Ryomen Sukuna,True Form / Full Power,17.02,Toji Fushiguro,Peak Form,15.12,1.0
+86,Obito Uchiha,Jubi Jinchuriki,31.33,Gowther,Emotions Restored,51.38,1.0
+87,Sasuke Uchiha,New Era / Susano'o,34.7,Chaos,Primordial Entity,96.0,0.0
+88,Yuno,Spirit of Zephyr / Spirit Dive,29.68,Thragg,Post-Timeskip (Comics),36.02,0.0
+89,Gon Freecss,Ryu and Ko,13.0,Chrollo Lucilfer,Skill Hunter Peak,13.0,0.0
+90,Yami Sukehiro,Death Thrust / Final War,27.18,Battle Beast,Final Battle Peak (Comics),36.02,0.0
+91,Minato Namikaze,Edo Tensei,27.18,Invincible,Post-Resurrections (Comics),36.02,0.0
+92,Might Guy,Eight Gates,33.3,Piccolo,Orange Form / Super Hero Arc,97.0,0.0
+93,Izuku Midoriya,Fa Jin / Gearshift / Full cowl,27.18,Adult Gon,Adult Form,17.02,0.0
+94,Nanami Kento,Shibuya Incident Peak,12.12,Omni-Man,Final Battle Peak (Comics),31.33,0.0
+95,Shoto Todoroki,Flashfreeze Heatwave,23.04,Escanor,The One Ultimate,57.8,0.0
+96,Obito Uchiha,Jubi Jinchuriki,31.33,Julius Novachrono,Wizard King Peak,19.94,1.0
+97,Hashirama Senju,Sage Mode / War Arc,29.59,Gohan,Beast Form / Super Hero Arc,97.0,0.0
+98,Lucifero,True Form,27.18,Battle Beast,Final Battle Peak (Comics),36.02,0.0
+99,Kaguya Otsutsuki,Truth Seeker Orbs,51.38,Gowther,Emotions Restored,51.38,1.0
