@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アニメ VERSUS — ML Death Battle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #16121f;
+    --bg2: #1e1830;
+    --paper: #f1e6cc;
+    --ink: #241c14;
+    --red: #e13d4e;
+    --red-dk: #8f1d2c;
+    --blue: #3d7be1;
+    --blue-dk: #1d3f8f;
+    --gold: #ffd166;
+    --white: #efe9dc;
+    --grey: #8b8398;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    background-color: var(--bg);
+    /* seigaiha-ish wave pattern */
+    background-image:
+      radial-gradient(circle at 50% 110%, transparent 42%, rgba(255,255,255,0.025) 43%, rgba(255,255,255,0.025) 47%, transparent 48%),
+      radial-gradient(circle at 0% 110%, transparent 42%, rgba(255,255,255,0.025) 43%, rgba(255,255,255,0.025) 47%, transparent 48%),
+      radial-gradient(circle at 100% 110%, transparent 42%, rgba(255,255,255,0.025) 43%, rgba(255,255,255,0.025) 47%, transparent 48%);
+    background-size: 64px 32px;
+    color: var(--white);
+    font-family: 'DotGothic16', monospace;
+    overflow-x: hidden;
+  }
+
+  /* CRT scanlines over everything */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.16) 0px, rgba(0,0,0,0.16) 1px, transparent 1px, transparent 3px);
+    z-index: 9999;
+  }
+
+  img { image-rendering: pixelated; }
+
+  /* ============ HEADER ============ */
+  header {
+    text-align: center;
+    padding: 22px 10px 14px;
+    border-bottom: 4px solid var(--gold);
+    background: linear-gradient(180deg, #241c3a 0%, var(--bg) 100%);
+    position: relative;
+  }
+  header .sun {
+    position: absolute;
+    left: 50%; top: 8px;
+    transform: translateX(-50%);
+    width: 74px; height: 74px;
+    background: radial-gradient(circle, #c2273a 0%, #c2273a 60%, transparent 61%);
+    opacity: .35;
+    z-index: 0;
+  }
+  header h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 22px;
+    color: var(--gold);
+    text-shadow: 3px 3px 0 var(--red-dk), 6px 6px 0 #000;
+    position: relative; z-index: 1;
+    letter-spacing: 2px;
+  }
+  header .jp {
+    font-size: 15px;
+    color: var(--grey);
+    margin-top: 8px;
+    letter-spacing: 8px;
+    position: relative; z-index: 1;
+  }
+
+  #ghCorner {
+    position: absolute;
+    top: 14px; right: 16px;
+    z-index: 10;
+    text-align: right;
+  }
+  #ghCorner a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    color: var(--white);
+    text-decoration: none;
+    background: #2a2438;
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 0 2px #000, 3px 3px 0 2px rgba(0,0,0,.6);
+    padding: 7px 10px;
+    letter-spacing: 1px;
+  }
+  #ghCorner a:hover { background: #3a3050; transform: translateY(-1px); }
+  #ghCorner a:active { transform: translateY(2px); box-shadow: 0 0 0 2px #000; }
+  #ghCorner a svg { width: 16px; height: 16px; fill: var(--gold); image-rendering: pixelated; }
+  #ghCorner .by {
+    display: block;
+    margin-top: 6px;
+    font-family: 'DotGothic16', monospace;
+    font-size: 12px;
+    color: var(--grey);
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 760px) {
+    #ghCorner { position: static; text-align: center; margin-top: 10px; }
+  }
+
+  /* ============ ARENA SPLIT ============ */
+  #arena {
+    display: flex;
+    min-height: calc(100vh - 118px);
+    position: relative;
+  }
+
+  .side {
+    flex: 1;
+    padding: 18px 16px 90px;
+    min-width: 0;
+  }
+  #sideA { border-right: 2px solid #000; background: linear-gradient(180deg, rgba(225,61,78,0.07), transparent 240px); }
+  #sideB { border-left: 2px solid #000; background: linear-gradient(180deg, rgba(61,123,225,0.07), transparent 240px); }
+
+  .side h2 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 13px;
+    text-align: center;
+    padding: 10px 6px;
+    margin-bottom: 14px;
+    border: 3px solid;
+    box-shadow: 0 0 0 3px #000, inset 0 0 0 2px #000;
+  }
+  #sideA h2 { color: #ff97a1; border-color: var(--red); background: rgba(143,29,44,.35); }
+  #sideB h2 { color: #9dc0ff; border-color: var(--blue); background: rgba(29,63,143,.35); }
+  .side h2 .jp { display:block; font-family:'DotGothic16'; font-size: 12px; margin-top:6px; color: var(--grey); }
+
+  /* center VS divider */
+  #vsBadge {
+    position: absolute;
+    left: 50%; top: 170px;
+    transform: translateX(-50%);
+    z-index: 5;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 26px;
+    color: var(--gold);
+    background: var(--bg2);
+    border: 4px solid var(--gold);
+    box-shadow: 0 0 0 4px #000, 6px 6px 0 4px rgba(0,0,0,.6);
+    padding: 16px 14px;
+    text-shadow: 2px 2px 0 var(--red-dk);
+    pointer-events: none;
+  }
+
+  /* ============ ROSTER GRID ============ */
+  .roster {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    position: relative;
+    cursor: pointer;
+    background: var(--bg2);
+    border: 3px solid #4a4258;
+    box-shadow: 0 0 0 2px #000;
+    transition: transform .08s steps(2), border-color .08s;
+  }
+  .card:hover { transform: translateY(-3px); z-index: 20; }
+  #sideA .card:hover { border-color: var(--red); }
+  #sideB .card:hover { border-color: var(--blue); }
+
+  .card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    filter: contrast(1.05) saturate(1.1);
+  }
+  .card .nm {
+    display: block;
+    font-size: 11px;
+    text-align: center;
+    padding: 4px 2px 5px;
+    background: #000;
+    color: var(--white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* hover tooltip — abridged info card (appears after delay) */
+  .tip {
+    position: absolute;
+    left: 50%; top: -8px;
+    transform: translate(-50%, -100%);
+    width: 195px;
+    background: var(--paper);
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0 rgba(0,0,0,.7);
+    padding: 8px 9px;
+    font-size: 12px;
+    line-height: 1.45;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .12s, visibility .12s;
+    transition-delay: 0s;
+    pointer-events: none;
+    z-index: 50;
+  }
+  .card:hover .tip {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: .55s;   /* hover a moment before it shows */
+  }
+  .tip b { font-size: 12px; display:block; border-bottom: 2px solid var(--ink); padding-bottom:3px; margin-bottom:4px; }
+  .tip .frm { color: #6b4b2a; font-size: 11px; display:block; margin-bottom:4px; }
+  .tip .st { display:flex; justify-content: space-between; gap:6px; }
+  .tip .st span:last-child { font-weight: bold; }
+
+  /* ============ PROFILE (selected) ============ */
+  .profile {
+    display: none;
+    max-width: 420px;
+    margin: 0 auto;
+    animation: pop .18s steps(3);
+  }
+  @keyframes pop { from { transform: scale(.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  .profile .frame {
+    border: 4px solid var(--gold);
+    box-shadow: 0 0 0 4px #000, 8px 8px 0 4px rgba(0,0,0,.55);
+    background: var(--bg2);
+    padding: 12px;
+  }
+  #sideA .profile .frame { border-color: var(--red); }
+  #sideB .profile .frame { border-color: var(--blue); }
+
+  .profile img.big {
+    display:block;
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    background:
+      repeating-conic-gradient(rgba(255,255,255,.04) 0% 25%, transparent 0% 50%) 0 0 / 16px 16px,
+      #120e1c;
+    border: 3px solid #000;
+  }
+  .profile h3 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    color: var(--gold);
+    margin: 12px 0 4px;
+    text-shadow: 2px 2px 0 #000;
+  }
+  .profile .sub { color: var(--grey); font-size: 13px; margin-bottom: 10px; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px 14px;
+    font-size: 12.5px;
+    background: rgba(0,0,0,.35);
+    border: 2px solid #000;
+    padding: 8px 10px;
+  }
+  .stats .row { display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px dotted #3c3450; padding: 2px 0; }
+  .stats .row .k { color: var(--grey); }
+  .stats .row .v { color: var(--white); text-align: right; }
+  .stats .row .v small { color: var(--gold); }
+
+  .profile .notes {
+    margin-top: 10px;
+    background: var(--paper);
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    box-shadow: 3px 3px 0 rgba(0,0,0,.6);
+    padding: 8px 10px;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  .profile .notes b { display:block; margin-bottom: 2px; font-size: 11px; letter-spacing: 1px; }
+
+  .backBtn {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11px;
+    padding: 10px;
+    cursor: pointer;
+    color: var(--white);
+    background: #3a3348;
+    border: 3px solid #6a6180;
+    box-shadow: 0 3px 0 #000;
+  }
+  .backBtn:hover { background: #4a4160; }
+  .backBtn:active { transform: translateY(2px); box-shadow: none; }
+
+  /* ============ FIGHT BUTTON ============ */
+  #fightBar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    text-align: center;
+    padding: 12px;
+    background: linear-gradient(0deg, rgba(0,0,0,.92), rgba(0,0,0,.6) 80%, transparent);
+    z-index: 100;
+  }
+  #fightBtn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 16px;
+    padding: 14px 44px;
+    cursor: pointer;
+    color: #5a5468;
+    background: #2a2438;
+    border: 4px solid #453d58;
+    box-shadow: 0 0 0 3px #000;
+    letter-spacing: 3px;
+  }
+  #fightBtn.ready {
+    color: #fff;
+    background: linear-gradient(180deg, var(--red) 0%, var(--red-dk) 100%);
+    border-color: var(--gold);
+    animation: throb 0.8s steps(2) infinite;
+  }
+  @keyframes throb { 50% { box-shadow: 0 0 0 3px #000, 0 0 18px var(--red); } }
+  #fightBtn.ready:active { transform: translateY(3px); }
+
+  /* ============ BATTLE OVERLAY ============ */
+  #battle {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: rgba(10,7,16,.96);
+    overflow-y: auto;
+    padding: 28px 14px 40px;
+  }
+  #battle.on { display: block; }
+
+  #battle .inner { max-width: 760px; margin: 0 auto; }
+
+  #battleTitle {
+    font-family: 'Press Start 2P', monospace;
+    text-align: center;
+    font-size: 13px;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  #battleTitle .jp { font-family:'DotGothic16'; display:block; color: var(--grey); font-size: 13px; margin-top: 5px; letter-spacing: 5px;}
+
+  /* pixel fight stage */
+  #stage {
+    position: relative;
+    height: 150px;
+    margin: 16px 0;
+    border: 4px solid #000;
+    box-shadow: 0 0 0 3px #38304a;
+    background:
+      linear-gradient(180deg, #2b1f45 0%, #452a4e 55%, #1c1428 56%, #14101e 100%);
+    overflow: hidden;
+  }
+  #stage.shake { animation: shake .28s steps(4) infinite; }
+  @keyframes shake {
+    0%,100% { transform: translate(0,0); }
+    25% { transform: translate(-3px,2px); }
+    50% { transform: translate(3px,-2px); }
+    75% { transform: translate(-2px,-2px); }
+  }
+  #stage .moon {
+    position: absolute; right: 40px; top: 14px;
+    width: 34px; height: 34px;
+    background: radial-gradient(circle, #ffd166 0 58%, transparent 60%);
+    opacity: .8;
+  }
+  #fightCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    z-index: 2;
+  }
+  #stage .simText {
+    position: absolute;
+    top: 8px; left: 10px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    animation: blink 1s steps(1) infinite;
+    z-index: 3;
+  }
+  #stage .ground {
+    position:absolute; bottom:0; left:0; right:0; height: 22px;
+    background: repeating-linear-gradient(90deg, #241a35 0 14px, #1d1530 14px 28px);
+    border-top: 3px solid #000;
+  }
+
+  /* JRPG dialogue box for the stream */
+  #streamBox {
+    background: var(--paper);
+    color: var(--ink);
+    border: 4px solid var(--ink);
+    box-shadow: 0 0 0 3px var(--paper), 6px 6px 0 3px rgba(0,0,0,.65);
+    padding: 14px 16px 18px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    min-height: 90px;
+    white-space: pre-wrap;
+  }
+  #streamBox .tag {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    color: var(--red-dk);
+    display: block;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  #streamText::after {
+    content: "▌";
+    animation: blink .7s steps(1) infinite;
+    color: var(--red-dk);
+  }
+  #streamBox.done #streamText::after { content: ""; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ============ RESULTS ============ */
+  #results { display: none; margin-top: 22px; animation: pop .25s steps(4); }
+  #results.on { display: block; }
+
+  #winnerBanner {
+    text-align: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 17px;
+    color: var(--gold);
+    background: linear-gradient(180deg, #3a2b12, #241a0a);
+    border: 4px solid var(--gold);
+    box-shadow: 0 0 0 3px #000, 0 0 26px rgba(255,209,102,.25);
+    padding: 16px 10px;
+    text-shadow: 2px 2px 0 var(--red-dk);
+  }
+  #winnerBanner .jp { display:block; font-family:'DotGothic16'; font-size:14px; color:var(--grey); margin-top:8px; letter-spacing:6px; }
+
+  .probRow { margin-top: 14px; }
+  .probRow .lbl { display:flex; justify-content:space-between; font-size: 13px; margin-bottom: 3px; }
+  .bar {
+    height: 18px;
+    background: #241d33;
+    border: 2px solid #000;
+    box-shadow: 0 0 0 2px #38304a;
+    position: relative;
+    overflow: hidden;
+  }
+  .bar .fill {
+    height: 100%;
+    width: 0%;
+    transition: width 1s steps(12);
+    background: repeating-linear-gradient(90deg, var(--red) 0 10px, #ff6b7a 10px 12px);
+  }
+  .bar .fill.b { background: repeating-linear-gradient(90deg, var(--blue) 0 10px, #6b9dff 10px 12px); }
+
+  #factors {
+    margin-top: 16px;
+    background: rgba(0,0,0,.4);
+    border: 3px solid #38304a;
+    box-shadow: 0 0 0 2px #000;
+    padding: 10px 14px;
+    font-size: 13.5px;
+  }
+  #factors h4 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  #factors .f { display:flex; justify-content: space-between; gap: 10px; padding: 3px 0; border-bottom: 1px dotted #38304a; }
+  #factors .f .val.pos { color: #ff97a1; }
+  #factors .f .val.neg { color: #9dc0ff; }
+
+  #rematch {
+    display:block;
+    margin: 22px auto 0;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    padding: 12px 30px;
+    cursor: pointer;
+    color: var(--white);
+    background: #3a3348;
+    border: 3px solid var(--gold);
+    box-shadow: 0 4px 0 #000;
+  }
+  #rematch:hover { background: #4a4160; }
+  #rematch:active { transform: translateY(3px); box-shadow: none; }
+
+  @media (max-width: 760px) {
+    #arena { flex-direction: column; }
+    #vsBadge { display: none; }
+    header h1 { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="sun"></div>
+  <h1>ANIME VERSUS</h1>
+  <div class="jp">アニメ対戦 — 機械学習デスバトル</div>
+  <div id="ghCorner">
+    <a href="https://github.com/aidentejada/anime-versus-ml" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      GITHUB
+    </a>
+    <span class="by">by aiden tejada</span>
+  </div>
+</header>
+
+<div id="arena">
+  <section class="side" id="sideA">
+    <h2>PLAYER A<span class="jp">プレイヤーA　選択せよ</span></h2>
+    <div class="roster" id="rosterA"></div>
+    <div class="profile" id="profileA"></div>
+  </section>
+
+  <div id="vsBadge">VS</div>
+
+  <section class="side" id="sideB">
+    <h2>PLAYER B<span class="jp">プレイヤーB　選択せよ</span></h2>
+    <div class="roster" id="rosterB"></div>
+    <div class="profile" id="profileB"></div>
+  </section>
+</div>
+
+<div id="fightBar">
+  <button id="fightBtn" disabled>SELECT FIGHTERS</button>
+</div>
+
+<div id="battle">
+  <div class="inner">
+    <div id="battleTitle">
+      <span id="matchLabel">FIGHT</span>
+      <span class="jp">戦闘中・・・</span>
+    </div>
+
+    <div id="stage" class="shake">
+      <div class="moon"></div>
+      <canvas id="fightCanvas"></canvas>
+      <span class="simText">SIMULATING...</span>
+      <div class="ground"></div>
+    </div>
+
+    <div id="streamBox">
+      <span class="tag">— BATTLE ANALYSIS 実況 —</span><span id="streamText"></span>
+    </div>
+
+    <div id="results">
+      <div id="winnerBanner"></div>
+      <div class="probRow">
+        <div class="lbl"><span id="lblA"></span><span id="pctA"></span></div>
+        <div class="bar"><div class="fill" id="barA"></div></div>
+      </div>
+      <div class="probRow">
+        <div class="lbl"><span id="lblB"></span><span id="pctB"></span></div>
+        <div class="bar"><div class="fill b" id="barB"></div></div>
+      </div>
+      <div id="factors"><h4>DECIDING FACTORS 決め手</h4><div id="factorList"></div></div>
+      <button id="rematch">↺ REMATCH</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------------- stat word-form mappings ---------------- */
+const AP_COLS = ["tier","attack","durability","striking_strength"];
+const HAX_COLS = ["durability_negation","regeneration","power_amplification","mobility_hax",
+                  "time_space_manip","mind_soul_hax","resistance_physical","resistance_hax"];
+
+function apWord(v){
+  if (v < 10) return "Building";
+  if (v < 13) return "City Block";
+  if (v < 16) return "City";
+  if (v < 19) return "Mountain";
+  if (v < 23) return "Island";
+  if (v < 28) return "Country";
+  if (v < 32) return "Continent";
+  if (v < 38) return "Moon";
+  if (v < 48) return "Planet";
+  if (v < 58) return "Large Planet";
+  if (v < 75) return "Star";
+  if (v < 92) return "Solar System";
+  return "Universal+";
+}
+function speedWord(v){
+  if (v < 2) return "Peak Human";
+  if (v < 3) return "Supersonic";
+  if (v < 4) return "Hypersonic";
+  if (v < 5.5) return "High Hypersonic";
+  if (v < 7) return "Massively Hypersonic";
+  if (v < 8.6) return "Sub-Relativistic";
+  if (v < 9.5) return "Relativistic+";
+  if (v < 10.5) return "FTL";
+  if (v < 12) return "Massively FTL+";
+  return "Immeasurable";
+}
+function intWord(v){
+  if (v < 3) return "Below Average";
+  if (v < 5) return "Average";
+  if (v < 7) return "Gifted";
+  if (v < 8.5) return "Genius";
+  if (v < 10) return "Super Genius";
+  return "Nigh-Omniscient";
+}
+function stamWord(v){
+  if (v >= 50) return "Limitless";
+  if (v < 5) return "Athlete";
+  if (v < 7) return "Superhuman";
+  if (v < 9) return "Vast";
+  return "Godlike";
+}
+function liftWord(v){
+  if (v >= 50) return "Immeasurable";
+  if (v < 5) return "Class 5";
+  if (v < 8) return "Class K";
+  if (v < 12) return "Class M";
+  if (v < 18) return "Class G";
+  if (v < 25) return "Class T";
+  return "Stellar";
+}
+function haxWord(v){
+  if (v < 1.5) return "None";
+  if (v < 3) return "Minimal";
+  if (v < 4.5) return "Low";
+  if (v < 6) return "Moderate";
+  if (v < 7.5) return "High";
+  if (v < 8.75) return "Extreme";
+  return "Godly";
+}
+function statWord(col, v){
+  if (AP_COLS.includes(col)) return apWord(v);
+  if (col === "speed") return speedWord(v);
+  if (col === "intelligence") return intWord(v);
+  if (col === "stamina") return stamWord(v);
+  if (col === "lifting_strength") return liftWord(v);
+  if (HAX_COLS.includes(col)) return haxWord(v);
+  return String(v);
+}
+const STAT_ORDER = ["tier","attack","speed","durability","intelligence","stamina",
+  "lifting_strength","striking_strength","durability_negation","regeneration",
+  "power_amplification","mobility_hax","time_space_manip","mind_soul_hax",
+  "resistance_physical","resistance_hax"];
+const pretty = c => c.replaceAll("_"," ").replace(/\b\w/g, s => s.toUpperCase());
+
+/* ---------------- state ---------------- */
+let CHARS = [];
+let sel = { A: null, B: null };
+
+/* ---------------- load roster ---------------- */
+async function init(){
+  const res = await fetch("/chars");
+  CHARS = await res.json();
+  CHARS.sort((a,b) => a.name.localeCompare(b.name));   // alphabetical
+  renderRoster("A");
+  renderRoster("B");
+}
+
+function cardHTML(c){
+  return `
+    <img src="/imgs/${c.image_links}" alt="${c.name}" loading="lazy">
+    <span class="nm">${c.name}</span>
+    <div class="tip">
+      <b>${c.name}</b>
+      <span class="frm">${c["form / era / buff"]} — ${c.anime}</span>
+      <div class="st"><span>Tier</span><span>${apWord(c.tier)} (${c.tier})</span></div>
+      <div class="st"><span>Attack</span><span>${apWord(c.attack)} (${c.attack})</span></div>
+      <div class="st"><span>Speed</span><span>${speedWord(c.speed)} (${c.speed})</span></div>
+    </div>`;
+}
+
+function renderRoster(side){
+  const el = document.getElementById("roster"+side);
+  el.innerHTML = "";
+  CHARS.forEach(c => {
+    const d = document.createElement("div");
+    d.className = "card";
+    d.innerHTML = cardHTML(c);
+    d.onclick = () => select(side, c);
+    d.addEventListener("mouseenter", () => {
+      const tip = d.querySelector(".tip");
+      tip.style.marginLeft = "0px";
+      tip.style.top = "";
+      tip.style.transform = "";
+      const tr = tip.getBoundingClientRect();
+      let shift = 0;
+      if (tr.left < 8) shift = 8 - tr.left;
+      else if (tr.right > innerWidth - 8) shift = (innerWidth - 8) - tr.right;
+      tip.style.marginLeft = shift + "px";
+      if (tr.top < 4) {              // would clip the top -> flip below the card
+        tip.style.top = "calc(100% + 8px)";
+        tip.style.transform = "translate(-50%, 0)";
+      }
+    });
+    el.appendChild(d);
+  });
+}
+
+/* ---------------- selection / profile ---------------- */
+function select(side, c){
+  sel[side] = c;
+  document.getElementById("roster"+side).style.display = "none";
+  const p = document.getElementById("profile"+side);
+  const rows = STAT_ORDER.map(col => `
+      <div class="row"><span class="k">${pretty(col)}</span>
+      <span class="v">${statWord(col, c[col])} <small>(${c[col]})</small></span></div>`).join("");
+  p.innerHTML = `
+    <div class="frame">
+      <img class="big" src="/imgs/${c.image_links}" alt="${c.name}">
+      <h3>${c.name}</h3>
+      <div class="sub">${c["form / era / buff"]} ・ ${c.anime}</div>
+      <div class="stats">${rows}</div>
+      <div class="notes"><b>◆ CANON MECHANICS 奥義</b>${c.notes}</div>
+      <button class="backBtn">◀ BACK 戻る</button>
+    </div>`;
+  p.querySelector(".backBtn").onclick = () => deselect(side);
+  p.style.display = "block";
+  updateFightBtn();
+}
+
+function deselect(side){
+  sel[side] = null;
+  document.getElementById("profile"+side).style.display = "none";
+  document.getElementById("roster"+side).style.display = "grid";
+  updateFightBtn();
+}
+
+function updateFightBtn(){
+  const btn = document.getElementById("fightBtn");
+  if (sel.A && sel.B){
+    btn.disabled = false;
+    btn.classList.add("ready");
+    btn.textContent = "⚔ FIGHT ⚔";
+  } else {
+    btn.disabled = true;
+    btn.classList.remove("ready");
+    btn.textContent = "SELECT FIGHTERS";
+  }
+}
+
+/* ---------------- pixel fight engine ---------------- */
+const SPRITE_IDLE = [
+  "..XXX..",
+  "..XWX..",
+  "..XXX..",
+  "...X...",
+  ".XXXXX.",
+  "X..X..X",
+  "...X...",
+  "..XXX..",
+  "..X.X..",
+  "..X.X..",
+  "..X.X.."
+];
+const SPRITE_PUNCH = [
+  "..XXX..",
+  "..XXW..",
+  "..XXX..",
+  "...X...",
+  ".XXXXXX",
+  "X..X...",
+  "...X...",
+  "..XXX..",
+  "..X.X..",
+  ".X...X.",
+  ".X...X."
+];
+const COL_A = "#ff5a68", COL_B = "#5a8dff";
+let animId = null, animTimer = null;
+
+function drawSprite(ctx, sprite, x, y, color, flip, px){
+  const w = sprite[0].length;
+  for (let r = 0; r < sprite.length; r++){
+    for (let c = 0; c < w; c++){
+      const ch = sprite[r][flip ? w - 1 - c : c];
+      if (ch === ".") continue;
+      ctx.fillStyle = ch === "W" ? "#fff" : color;
+      ctx.fillRect(x + c * px, y + r * px, px, px);
+    }
+  }
+}
+
+function stopFightAnim(){
+  cancelAnimationFrame(animId);
+  clearTimeout(animTimer);
+}
+
+function startFightAnim(){
+  stopFightAnim();
+  const cv = document.getElementById("fightCanvas");
+  const ctx = cv.getContext("2d");
+  const W = cv.width = 192, H = cv.height = 80;
+  const px = 2, sprW = 7 * px, sprH = 11 * px, feetY = 68;
+  const aHome = 16, bHome = W - 16 - sprW;
+  const aHit = W / 2 - sprW - 2, bHit = W / 2 + 2;
+  let sparks = [];
+  const t0 = performance.now();
+
+  function frame(now){
+    const t = (now - t0) % 1500;
+    ctx.clearRect(0, 0, W, H);
+
+    let ax = aHome, bx = bHome, pose = SPRITE_IDLE, bob = 0, clash = false;
+    if (t < 550){                              // face off, bounce
+      bob = Math.floor(t / 140) % 2;
+    } else if (t < 850){                       // dash in (chunky steps)
+      const p = Math.floor(((t - 550) / 300) * 5) / 5;
+      ax = aHome + (aHit - aHome) * p;
+      bx = bHome + (bHit - bHome) * p;
+      pose = SPRITE_PUNCH;
+    } else if (t < 1100){                      // CLASH
+      ax = aHit; bx = bHit; pose = SPRITE_PUNCH; clash = true;
+      if (sparks.length === 0){
+        for (let i = 0; i < 12; i++){
+          const ang = Math.random() * Math.PI * 2, sp = 0.6 + Math.random() * 1.5;
+          sparks.push({ x: W/2, y: feetY - 14, vx: Math.cos(ang)*sp, vy: Math.sin(ang)*sp - .4, life: 16 });
+        }
+      }
+    } else {                                   // knockback
+      const p = Math.floor(((t - 1100) / 400) * 5) / 5;
+      ax = aHit + (aHome - aHit) * p;
+      bx = bHit + (bHome - bHit) * p;
+      if (t > 1480) sparks = [];
+    }
+
+    sparks.forEach(s => { s.x += s.vx; s.y += s.vy; s.life--; });
+    sparks = sparks.filter(s => s.life > 0);
+    sparks.forEach(s => {
+      ctx.fillStyle = s.life % 2 ? "#ffd166" : "#fff";
+      ctx.fillRect(s.x, s.y, 2, 2);
+    });
+
+    drawSprite(ctx, pose, ax, feetY - sprH - bob * px, COL_A, false, px);
+    drawSprite(ctx, pose, bx, feetY - sprH - (bob ? 0 : 1) * px, COL_B, true, px);
+
+    if (clash && Math.floor(t / 60) % 2 === 0){
+      ctx.fillStyle = "rgba(255,255,255,.5)";     // impact flash
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = "#ffd166";
+      ctx.font = '10px "Press Start 2P"';
+      ctx.fillText("*", W/2 - 4, feetY - 26);
+    }
+    animId = requestAnimationFrame(frame);
+  }
+  animId = requestAnimationFrame(frame);
+}
+
+function endFightAnim(winnerIsA){
+  stopFightAnim();
+  const cv = document.getElementById("fightCanvas");
+  const ctx = cv.getContext("2d");
+  const W = cv.width, px = 2, sprH = 11 * px, feetY = 68;
+  let tick = 0;
+  function scene(){
+    ctx.clearRect(0, 0, W, cv.height);
+    const winCol  = winnerIsA ? COL_A : COL_B;
+    const loseCol = winnerIsA ? COL_B : COL_A;
+    // winner stands tall, bouncing; loser flat on the ground
+    drawSprite(ctx, SPRITE_IDLE, W/2 - 26, feetY - sprH - (tick % 2) * px, winCol, !winnerIsA, px);
+    ctx.save();
+    ctx.translate(W/2 + 8, feetY - 4);
+    ctx.rotate(Math.PI / 2);
+    drawSprite(ctx, SPRITE_IDLE, 0, 0, loseCol, false, px);
+    ctx.restore();
+    if (tick % 2 === 0){
+      ctx.fillStyle = "#ffd166";
+      ctx.font = '10px "Press Start 2P"';
+      ctx.fillText("K.O.!", W/2 - 22, 18);
+    }
+    tick++;
+    animTimer = setTimeout(scene, 320);
+  }
+  scene();
+}
+
+/* ---------------- battle ---------------- */
+document.getElementById("fightBtn").onclick = fight;
+document.getElementById("rematch").onclick = () => {
+  stopFightAnim();
+  document.getElementById("battle").classList.remove("on");
+  document.getElementById("results").classList.remove("on");
+  document.getElementById("streamText").textContent = "";
+  document.getElementById("streamBox").classList.remove("done");
+};
+
+async function fight(){
+  const a = sel.A, b = sel.B;
+  const battle = document.getElementById("battle");
+  const stage = document.getElementById("stage");
+  const streamText = document.getElementById("streamText");
+  const streamBox = document.getElementById("streamBox");
+
+  document.getElementById("matchLabel").textContent = `${a.name}  VS  ${b.name}`;
+  streamText.textContent = "";
+  streamBox.classList.remove("done");
+  document.getElementById("results").classList.remove("on");
+  stage.classList.add("shake");
+  battle.classList.add("on");
+  battle.scrollTop = 0;
+  startFightAnim();
+
+  // 1) get the verdict data first (held back until the stream finishes)
+  let result = null;
+  try {
+    const r = await fetch(`/matchups?a=${a.id}&b=${b.id}`);
+    result = await r.json();
+  } catch(e){
+    streamText.textContent = "[failed to reach the arena: " + e + "]";
+    return;
+  }
+
+  // 2) stream the narration live, token by token
+  try {
+    const resp = await fetch(`/narrate?a=${a.id}&b=${b.id}`);
+    const reader = resp.body.getReader();
+    const dec = new TextDecoder();
+    while (true){
+      const {done, value} = await reader.read();
+      if (done) break;
+      streamText.textContent += dec.decode(value, {stream:true});
+    }
+  } catch(e){
+    streamText.textContent += "\n[stream lost: " + e + "]";
+  }
+
+  // 3) stream complete -> K.O. scene, reveal the verdict
+  streamBox.classList.add("done");
+  stage.classList.remove("shake");
+  if (result) endFightAnim(result.winner === result.a_name);
+  else stopFightAnim();
+  showResults(a, b, result);
+}
+
+function showResults(a, b, r){
+  if (!r) return;
+  document.getElementById("winnerBanner").innerHTML =
+    `☆ WINNER: ${r.winner} ☆<span class="jp">CONFIDENCE: ${r.confidence}%</span>`;
+  document.getElementById("lblA").textContent = `${r.a_name} (A)`;
+  document.getElementById("lblB").textContent = `${r.b_name} (B)`;
+  document.getElementById("pctA").textContent = r.proba_a + "%";
+  document.getElementById("pctB").textContent = r.proba_b + "%";
+  document.getElementById("factorList").innerHTML = r.top_factors.map(f => `
+    <div class="f">
+      <span>${pretty(f.feature.replace(/^a_/, a.name+" ").replace(/^b_/, b.name+" "))}</span>
+      <span class="val ${f.value > 0 ? "pos" : "neg"}">${f.value > 0 ? "+" : ""}${f.value} → ${f.favors}</span>
+    </div>`).join("");
+
+  const res = document.getElementById("results");
+  res.classList.add("on");
+  requestAnimationFrame(() => {
+    document.getElementById("barA").style.width = r.proba_a + "%";
+    document.getElementById("barB").style.width = r.proba_b + "%";
+  });
+  res.scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+init();
+</script>
+</body>
+</html>

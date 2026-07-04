@@ -16,11 +16,10 @@ __license__ = "MIT License"
 import pandas as pd
 import xgboost as xgb
 import shap
-import numpy as np
 from sklearn.model_selection import GridSearchCV
 import sklearn
 
-df = pd.read_csv("../data/matchups_winners_final.csv")
+df = pd.read_csv("../data/matchups_winners_FIXED.csv") # 2346 rows instead of the mirrored final dataset to prevent leakage.
 drop = [
     "winner",
     "a_name",
@@ -35,6 +34,18 @@ y = df["winner"]
 
 X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=0.2, random_state=42)
 
+
+#mirroring training data ONLY.
+a_cols = [c for c in X_train.columns if c.startswith("a_")]
+b_cols = [c for c in X_train.columns if c.startswith("b_")]
+rename_map = {c: "b_" + c[2:] for c in a_cols} | {c: "a_" + c[2:] for c in b_cols}
+X_mirror = X_train.rename(columns=rename_map)[X_train.columns]
+y_mirror = 1.0 - y_train
+X_train = pd.concat([X_train, X_mirror], ignore_index=True)
+y_train = pd.concat([y_train, y_mirror], ignore_index=True)
+
+
+#params for grid search
 params = {
     'learning_rate': [0.01, 0.05, 0.1, 0.2],
     'max_depth': [3, 5, 7, 9],
@@ -42,7 +53,7 @@ params = {
     'colsample_bytree': [0.7, 0.8, 1.0],
     'min_child_weight': [1, 3, 5],
 }
-
+#initializing grid search
 grid = GridSearchCV(xgb.XGBClassifier(n_estimators=300, early_stopping_rounds=30),
                     params, cv=5, scoring='accuracy', verbose=1, n_jobs=-1)
 grid.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
@@ -50,6 +61,7 @@ grid.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
 print(f"Best params: {grid.best_params_}")
 print(f"Best CV accuracy: {grid.best_score_ * 100:.2f}%")
 
+#training the model on the best parameters.
 model = xgb.XGBClassifier(
     n_estimators=1000, # high number because we'll be using stopping rounds.
     learning_rate=grid.best_params_['learning_rate'],
