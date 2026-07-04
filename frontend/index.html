@@ -297,26 +297,21 @@
 
   /* ============ CUSTOM FIGHTER ============ */
   .qtile {
-    position: relative;
     aspect-ratio: 3 / 4;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
-    overflow: hidden;
     background:
       repeating-conic-gradient(rgba(255,255,255,.05) 0% 25%, transparent 0% 50%) 0 0 / 16px 16px,
       #241d33;
   }
-  .qtile svg.sil { width: 82%; height: 82%; fill: #000; }
-  .qtile .qmark {
-    position: absolute;
-    top: 46%; left: 50%;
-    transform: translate(-50%, -50%);
+  .qtile .plus {
     font-family: 'Press Start 2P', monospace;
-    font-size: 24px;
+    font-size: 40px;
     color: var(--gold);
     text-shadow: 3px 3px 0 #000;
   }
+  .card:hover .qtile .plus { color: #ffe08f; }
   .big.qm {
     position: relative;
     width: 100%;
@@ -330,16 +325,7 @@
       #241d33;
     border: 3px solid #000;
   }
-  .big.qm svg.sil { width: 72%; height: 88%; fill: #000; }
-  .big.qm .qmark {
-    position: absolute;
-    top: 44%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Press Start 2P', monospace;
-    font-size: 52px;
-    color: var(--gold);
-    text-shadow: 4px 4px 0 #000;
-  }
+  .big.qm svg.sil { width: 72%; height: 90%; fill: #000; }
 
   .builder { display: none; max-width: 470px; margin: 0 auto; animation: pop .18s steps(3); }
   .builder .frame {
@@ -413,7 +399,7 @@
   }
   .aiBtn:hover { background: #ffe08f; }
   .aiBtn:active { transform: translateY(2px); box-shadow: none; }
-  .aiBtn:disabled { background: #6a6180; color: #2a2438; cursor: wait; }
+  .aiBtn:disabled { background: #6a6180; color: #2a2438; cursor: not-allowed; }
   .builder .msg { font-size: 12px; color: #ff97a1; min-height: 15px; margin-top: 5px; }
   .confirmBtn {
     display: block;
@@ -728,57 +714,64 @@ const AP_COLS = ["tier","attack","durability","striking_strength"];
 const HAX_COLS = ["durability_negation","regeneration","power_amplification","mobility_hax",
                   "time_space_manip","mind_soul_hax","resistance_physical","resistance_hax"];
 
-function apWord(v){
-  if (v < 10) return "Building";
-  if (v < 13) return "City Block";
-  if (v < 16) return "City";
-  if (v < 19) return "Mountain";
-  if (v < 23) return "Island";
-  if (v < 28) return "Country";
-  if (v < 32) return "Continent";
-  if (v < 38) return "Moon";
-  if (v < 48) return "Planet";
-  if (v < 58) return "Large Planet";
-  if (v < 75) return "Star";
-  if (v < 92) return "Solar System";
-  return "Universal+";
+/* word-tier <-> numeric value, straight from POWER_SCALE.md (log10 midpoints).
+   ONE source of truth: the builder dropdowns AND the stat display both read these. */
+const AP_TIERS = [
+  ["Below Average Human",0.89],["Human level",1.90],["Athlete level",2.25],["Street level",3.33],
+  ["Wall level",5.75],["Small Building level",8.17],["Building level",9.47],["Large Building level",10.29],
+  ["City Block level",11.14],["Multi-City Block level",12.12],["Small Town level",13.00],["Town level",14.00],
+  ["Large Town level",15.12],["Small City level",16.02],["City level",17.02],["Mountain level",18.12],
+  ["Large Mountain level",18.94],["Island level",19.94],["Large Island level",21.12],["Small Country level",22.04],
+  ["Country level",23.04],["Large Country level",24.06],["Continent level",24.89],["Multi-Continent level",27.18],
+  ["Moon level",29.68],["Small Planet level",31.33],["Planet level",33.30],["Large Planet level",36.02],
+  ["Brown Dwarf level",39.17],["Small Star level",41.13],["Star level",42.13],["Large Star level",43.98],
+  ["Solar System level",51.38],["Multi-Solar System level",61.66],["Galaxy level",67.48],["Multi-Galaxy level",80.69],
+  ["Universe level",93.95],["High Universe level",94.50],["Universe level+",95.45],["Low Multiverse level",96.00],
+  ["Multiverse level",96.50],["Multiverse level+",97.00],["Low Complex Multiverse level",97.50],
+  ["Complex Multiverse level",98.00],["High Complex Multiverse level",98.25],["Hyperverse level",98.50],
+  ["High Hyperverse level",98.75],["Low Outerverse level",99.00],["Outerverse level",99.25],
+  ["Outerverse level+",99.50],["High Outerverse level",99.75],["Infinite / Immeasurable",100.00]
+];
+const SPEED_TIERS = [
+  ["Immobile",0.00],["Below Average Human",0.35],["Average Human",0.79],["Athletic Human",0.89],
+  ["Peak Human",1.04],["Superhuman",1.33],["Subsonic",1.87],["Subsonic+",2.37],["Transonic",2.55],
+  ["Supersonic",2.76],["Supersonic+",3.07],["Hypersonic",3.37],["Hypersonic+",3.67],["High Hypersonic",4.07],
+  ["High Hypersonic+",4.37],["Massively Hypersonic",4.87],["Massively Hypersonic+",5.51],
+  ["Sub-Relativistic",7.33],["Sub-Relativistic+",7.52],["Relativistic",7.85],["Relativistic+",8.33],
+  ["Speed of Light",8.48],["FTL",8.93],["FTL+",9.93],["Massively FTL",10.93],["Massively FTL+",11.48],
+  ["Infinite / Immeasurable / Omnipresent",100.00]
+];
+const LIFT_TIERS = [
+  ["Below Average Human",0.85],["Average Human",1.80],["Above Average Human",1.99],["Athletic Human",2.22],
+  ["Peak Human",2.55],["Superhuman / Class 1",2.87],["Class 5",3.35],["Class 10",3.85],["Class 25",4.20],
+  ["Class 50",4.55],["Class 100",4.85],["Class K",5.35],["Class M",7.50],["Class G",10.50],["Class T",13.50],
+  ["Class P",16.50],["Class E",19.50],["Class Z",22.50],["Class Y",25.50],["Pre-Stellar",28.15],
+  ["Stellar",31.05],["Multi-Stellar",37.30],["Galactic",42.99],["Multi-Galactic",48.48],["Universal",53.18],
+  ["Infinite / Immeasurable",100.00]
+];
+const INT_TIERS = [
+  ["Mindless",1],["Instinctive",2],["Animalistic",3],["High Animalistic",4],["Below Average",5],
+  ["Average",6],["Above Average",7],["Gifted",8],["Genius",9],["Extraordinary Genius",10],
+  ["Supergenius",11],["Nigh-Omniscient",12],["Omniscient",100]
+];
+const STAM_TIERS = [
+  ["Below Average",1],["Average",2],["Athletic",3],["Peak Human",4],["Superhuman",5],["Infinite",100]
+];
+
+// map a stored number back to its wiki word by nearest rubric value
+function nearestTier(tiers, v){
+  let best = tiers[0][0], bd = Infinity;
+  for (const [w, val] of tiers){
+    const d = Math.abs(val - v);
+    if (d < bd){ bd = d; best = w; }
+  }
+  return best;
 }
-function speedWord(v){
-  if (v < 2) return "Peak Human";
-  if (v < 3) return "Supersonic";
-  if (v < 4) return "Hypersonic";
-  if (v < 5.5) return "High Hypersonic";
-  if (v < 7) return "Massively Hypersonic";
-  if (v < 8.6) return "Sub-Relativistic";
-  if (v < 9.5) return "Relativistic+";
-  if (v < 10.5) return "FTL";
-  if (v < 12) return "Massively FTL+";
-  return "Immeasurable";
-}
-function intWord(v){
-  if (v < 3) return "Below Average";
-  if (v < 5) return "Average";
-  if (v < 7) return "Gifted";
-  if (v < 8.5) return "Genius";
-  if (v < 10) return "Super Genius";
-  return "Nigh-Omniscient";
-}
-function stamWord(v){
-  if (v >= 50) return "Limitless";
-  if (v < 5) return "Athlete";
-  if (v < 7) return "Superhuman";
-  if (v < 9) return "Vast";
-  return "Godlike";
-}
-function liftWord(v){
-  if (v >= 50) return "Immeasurable";
-  if (v < 5) return "Class 5";
-  if (v < 8) return "Class K";
-  if (v < 12) return "Class M";
-  if (v < 18) return "Class G";
-  if (v < 25) return "Class T";
-  return "Stellar";
-}
+function apWord(v){ return nearestTier(AP_TIERS, v); }
+function speedWord(v){ return nearestTier(SPEED_TIERS, v); }
+function intWord(v){ return nearestTier(INT_TIERS, v); }
+function stamWord(v){ return nearestTier(STAM_TIERS, v); }
+function liftWord(v){ return nearestTier(LIFT_TIERS, v); }
 function haxWord(v){
   if (v < 1.5) return "None";
   if (v < 3) return "Minimal";
@@ -802,6 +795,9 @@ const STAT_ORDER = ["tier","attack","speed","durability","intelligence","stamina
   "power_amplification","mobility_hax","time_space_manip","mind_soul_hax",
   "resistance_physical","resistance_hax"];
 const pretty = c => c.replaceAll("_"," ").replace(/\b\w/g, s => s.toUpperCase());
+
+/* blacked-out bust for custom fighters (no portrait) */
+const SILHOUETTE = `<svg class="sil" viewBox="0 0 100 100" preserveAspectRatio="xMidYMax meet"><circle cx="50" cy="33" r="19"/><path d="M14 100 C14 67 31 55 50 55 C69 55 86 67 86 100 Z"/></svg>`;
 
 /* ---------------- state ---------------- */
 let CHARS = [];
@@ -859,54 +855,13 @@ function renderRoster(side){
   // custom fighter card at the very end of the list
   const q = document.createElement("div");
   q.className = "card";
-  q.innerHTML = `<div class="qtile">?</div><span class="nm">CREATE FIGHTER</span>`;
+  q.innerHTML = `<div class="qtile"><span class="plus">+</span></div><span class="nm">CREATE FIGHTER</span>`;
   q.onclick = () => openBuilder(side);
   el.appendChild(q);
 }
 
 /* ---------------- custom fighter builder ---------------- */
-/* word-tier -> numeric value, straight from POWER_SCALE.md (log10 midpoints) */
-const AP_TIERS = [
-  ["Below Average Human",0.89],["Human level",1.90],["Athlete level",2.25],["Street level",3.33],
-  ["Wall level",5.75],["Small Building level",8.17],["Building level",9.47],["Large Building level",10.29],
-  ["City Block level",11.14],["Multi-City Block level",12.12],["Small Town level",13.00],["Town level",14.00],
-  ["Large Town level",15.12],["Small City level",16.02],["City level",17.02],["Mountain level",18.12],
-  ["Large Mountain level",18.94],["Island level",19.94],["Large Island level",21.12],["Small Country level",22.04],
-  ["Country level",23.04],["Large Country level",24.06],["Continent level",24.89],["Multi-Continent level",27.18],
-  ["Moon level",29.68],["Small Planet level",31.33],["Planet level",33.30],["Large Planet level",36.02],
-  ["Brown Dwarf level",39.17],["Small Star level",41.13],["Star level",42.13],["Large Star level",43.98],
-  ["Solar System level",51.38],["Multi-Solar System level",61.66],["Galaxy level",67.48],["Multi-Galaxy level",80.69],
-  ["Universe level",93.95],["High Universe level",94.50],["Universe level+",95.45],["Low Multiverse level",96.00],
-  ["Multiverse level",96.50],["Multiverse level+",97.00],["Low Complex Multiverse level",97.50],
-  ["Complex Multiverse level",98.00],["High Complex Multiverse level",98.25],["Hyperverse level",98.50],
-  ["High Hyperverse level",98.75],["Low Outerverse level",99.00],["Outerverse level",99.25],
-  ["Outerverse level+",99.50],["High Outerverse level",99.75],["Infinite / Immeasurable",100.00]
-];
-const SPEED_TIERS = [
-  ["Immobile",0.00],["Below Average Human",0.35],["Average Human",0.79],["Athletic Human",0.89],
-  ["Peak Human",1.04],["Superhuman",1.33],["Subsonic",1.87],["Subsonic+",2.37],["Transonic",2.55],
-  ["Supersonic",2.76],["Supersonic+",3.07],["Hypersonic",3.37],["Hypersonic+",3.67],["High Hypersonic",4.07],
-  ["High Hypersonic+",4.37],["Massively Hypersonic",4.87],["Massively Hypersonic+",5.51],
-  ["Sub-Relativistic",7.33],["Sub-Relativistic+",7.52],["Relativistic",7.85],["Relativistic+",8.33],
-  ["Speed of Light",8.48],["FTL",8.93],["FTL+",9.93],["Massively FTL",10.93],["Massively FTL+",11.48],
-  ["Infinite / Immeasurable / Omnipresent",100.00]
-];
-const LIFT_TIERS = [
-  ["Below Average Human",0.85],["Average Human",1.80],["Above Average Human",1.99],["Athletic Human",2.22],
-  ["Peak Human",2.55],["Superhuman / Class 1",2.87],["Class 5",3.35],["Class 10",3.85],["Class 25",4.20],
-  ["Class 50",4.55],["Class 100",4.85],["Class K",5.35],["Class M",7.50],["Class G",10.50],["Class T",13.50],
-  ["Class P",16.50],["Class E",19.50],["Class Z",22.50],["Class Y",25.50],["Pre-Stellar",28.15],
-  ["Stellar",31.05],["Multi-Stellar",37.30],["Galactic",42.99],["Multi-Galactic",48.48],["Universal",53.18],
-  ["Infinite / Immeasurable",100.00]
-];
-const INT_TIERS = [
-  ["Mindless",1],["Instinctive",2],["Animalistic",3],["High Animalistic",4],["Below Average",5],
-  ["Average",6],["Above Average",7],["Gifted",8],["Genius",9],["Extraordinary Genius",10],
-  ["Supergenius",11],["Nigh-Omniscient",12],["Omniscient",100]
-];
-const STAM_TIERS = [
-  ["Below Average",1],["Average",2],["Athletic",3],["Peak Human",4],["Superhuman",5],["Infinite",100]
-];
+/* (tier tables live up top, shared with the stat-display functions) */
 
 function tierOptions(tiers, def){
   return tiers.map(([w, v]) =>
@@ -955,8 +910,8 @@ function openBuilder(side){
 
       <div class="secHead">ABILITIES / HAX (1-10)</div>
       <div class="haxGrid">${haxInputs}</div>
-      <button class="aiBtn">◆ AUTOFILL ABILITIES (AI)</button>
-      <div class="msg"></div>
+      <button class="aiBtn" disabled>◆ AUTOFILL ABILITIES (AI)</button>
+      <div class="msg">Enter a name, form + anime to enable AI autofill.</div>
 
       <label>CANON MECHANICS NOTE (optional — grounds the fight narration)</label>
       <textarea class="f-notes" maxlength="400" placeholder="How do they actually win/lose? e.g. 'One punch ends anything physical, but he has no answer to soul or spatial hax.'"></textarea>
@@ -966,19 +921,30 @@ function openBuilder(side){
     </div>`;
 
   const msg = b.querySelector(".msg");
+  const nameIn = b.querySelector(".f-name");
+  const formIn = b.querySelector(".f-form");
+  const animeIn = b.querySelector(".f-anime");
+  const aiBtn = b.querySelector(".aiBtn");
 
-  b.querySelector(".aiBtn").onclick = async () => {
-    const name = b.querySelector(".f-name").value.trim();
-    if (!name){ msg.textContent = "Enter a name first — the AI scores from name + form."; return; }
-    const btn = b.querySelector(".aiBtn");
-    btn.disabled = true; btn.textContent = "SCORING..."; msg.textContent = "";
+  // AI autofill needs name + form + anime -- the series disambiguates odd/shared names
+  const refreshAi = () => {
+    const ready = nameIn.value.trim() && formIn.value.trim() && animeIn.value.trim();
+    aiBtn.disabled = !ready;
+    if (ready && msg.textContent.startsWith("Enter a name")) msg.textContent = "";
+  };
+  nameIn.addEventListener("input", refreshAi);
+  formIn.addEventListener("input", refreshAi);
+  animeIn.addEventListener("input", refreshAi);
+
+  aiBtn.onclick = async () => {
+    aiBtn.disabled = true; aiBtn.textContent = "SCORING..."; msg.textContent = "";
     try {
       const r = await fetch("/score_abilities", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name,
-          form: b.querySelector(".f-form").value.trim(),
+          name: nameIn.value.trim(),
+          form: formIn.value.trim(),
           anime: b.querySelector(".f-anime").value.trim()
         })
       });
@@ -988,7 +954,8 @@ function openBuilder(side){
     } catch(e){
       msg.textContent = "Request failed: " + e;
     }
-    btn.disabled = false; btn.textContent = "◆ AUTOFILL ABILITIES (AI)";
+    aiBtn.textContent = "◆ AUTOFILL ABILITIES (AI)";
+    refreshAi();
   };
 
   b.querySelector(".confirmBtn").onclick = () => {
@@ -1033,7 +1000,7 @@ function select(side, c){
       <span class="v">${statWord(col, c[col])} <small>(${c[col]})</small></span></div>`).join("");
   const portrait = c.image_links
     ? `<img class="big" src="/imgs/${c.image_links}" alt="${c.name}">`
-    : `<div class="big qm">?</div>`;
+    : `<div class="big qm">${SILHOUETTE}</div>`;
   p.innerHTML = `
     <div class="frame">
       ${portrait}

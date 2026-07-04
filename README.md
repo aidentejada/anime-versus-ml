@@ -4,6 +4,8 @@
 
 An XGBoost classifier trained on ~2,300 hand-curated matchups learns its own powerscaling logic from raw character stats, SHAP surfaces the factors behind each verdict, and an LLM turns those factors into a lore-accurate fight narration. Wrapped in a FastAPI backend with a retro-Japanese pixel frontend.
 
+**Live at [versus.aidentejada.com](https://versus.aidentejada.com)**
+
 ![Front page](data/imgs/screenshot.png)
 
 ---
