@@ -17,10 +17,11 @@ import xgboost as xgb
 import pandas as pd
 import shap
 import os
+import json
 import dotenv
 from openai import OpenAI
-from prompts import SYSTEM_PROMPT_EXPLAIN, EXPLAIN_PROMPT
-from fastapi import FastAPI
+from prompts import SYSTEM_PROMPT_EXPLAIN, EXPLAIN_PROMPT, SYSTEM_PROMPT_ABILITY, ABILITY_PROMPT
+from fastapi import FastAPI, Body
 from fastapi.responses import StreamingResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -48,6 +49,47 @@ STAT_COLS = [
 ]
 
 DROP_COLS = ["a_name", "a_form", "a_anime", "b_name", "b_form", "b_anime"]
+
+# the 8 subjective ability/hax columns an LLM scores (physical stats come from the user/wiki)
+ABILITY_KEYS = [
+    "durability_negation", "regeneration", "power_amplification", "mobility_hax",
+    "time_space_manip", "mind_soul_hax", "resistance_physical", "resistance_hax"
+]
+
+
+@app.post("/score_abilities")
+def score_abilities(payload: dict = Body(...)):
+    """Autofill the 8 ability/hax scores for a custom fighter via the free Groq model.
+    Reuses the roster's ability prompt + anchors (unedited) so scores drift consistently
+    rather than randomly. Body: {name, form, anime}. Returns {ok, scores:{...8 keys...}}."""
+    prompt = ABILITY_PROMPT.format(
+        name=payload.get("name", ""),
+        form=payload.get("form", ""),
+        anime=payload.get("anime", ""),
+    ) + (
+        "\n\nReturn ONLY a JSON object with these exact numeric keys, each a float 1.0-10.0:\n"
+        + ", ".join(ABILITY_KEYS)
+    )
+    try:
+        resp = llm.chat.completions.create(
+            model="openai/gpt-oss-120b",
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT_ABILITY},
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0.3,
+            max_tokens=2000,          # reasoning model: leave room for reasoning + the JSON
+            timeout=60,
+            response_format={"type": "json_object"},
+        )
+        raw = json.loads(resp.choices[0].message.content)
+        scores = {k: round(min(10.0, max(1.0, float(raw.get(k, 1.0)))), 1) for k in ABILITY_KEYS}
+        return {"ok": True, "scores": scores}
+    except Exception as e:
+        # never hard-fail the UI -- return floors + the error so the frontend can warn
+        return {"ok": False, "error": f"{type(e).__name__}: {e}",
+                "scores": {k: 1.0 for k in ABILITY_KEYS}}
+
 
 @app.get("/chars")
 def list_characters():
@@ -121,13 +163,9 @@ def print_stats_side_by_side(char_a, char_b):
         print(f"{col:<25} {str(a_val):<35} {str(b_val)}{marker}")
 
 
-@app.get("/matchups")
-def run_matchup(a: int, b: int):
-    """Pure logic: takes two character row-IDs, returns the prediction + SHAP as data.
-    Used by both the web endpoint and the CLI below."""
-    char_a = characters.iloc[a]
-    char_b = characters.iloc[b]
-
+def build_result(char_a, char_b):
+    """Core prediction logic. char_a/char_b are dict-like with name, form, anime and
+    every column in STAT_COLS -- works identically for roster rows and custom fighters."""
     matchup = create_matchup_row(char_a, char_b)
     X = matchup.drop(columns=DROP_COLS)
 
@@ -157,6 +195,18 @@ def run_matchup(a: int, b: int):
     }
 
 
+@app.get("/matchups")
+def run_matchup(a: int, b: int):
+    """Roster-vs-roster prediction by row-ID (used by the CLI and /docs)."""
+    return build_result(characters.iloc[a].to_dict(), characters.iloc[b].to_dict())
+
+
+@app.post("/matchups")
+def run_matchup_custom(payload: dict = Body(...)):
+    """Prediction for two full fighter objects -- lets either side be a custom-built fighter."""
+    return build_result(payload["a"], payload["b"])
+
+
 def build_explain_prompt(char_a, char_b, result):
     """Assemble the narration prompt: canon notes + SHAP factors with the raw A-vs-B
     stat values injected so the LLM can see ties instead of only feature importance."""
@@ -179,12 +229,10 @@ def build_explain_prompt(char_a, char_b, result):
     )
 
 
-def narrate_stream(a: int, b: int):
-    """Generator yielding the fight narration token-by-token.
-    Shared by the CLI and the /narrate endpoint."""
-    char_a = characters.iloc[a]
-    char_b = characters.iloc[b]
-    result = run_matchup(a, b)
+def stream_narration(char_a, char_b):
+    """Generator yielding the fight narration token-by-token from two fighter dicts.
+    Shared by the CLI and both /narrate endpoints."""
+    result = build_result(char_a, char_b)
     prompt = build_explain_prompt(char_a, char_b, result)
 
     try:
@@ -213,8 +261,20 @@ def narrate_stream(a: int, b: int):
 
 @app.get("/narrate")
 def narrate(a: int, b: int):
-    """Streams the fight narration to the browser token-by-token as it's generated."""
-    return StreamingResponse(narrate_stream(a, b), media_type="text/plain")
+    """Streams narration for a roster-vs-roster matchup by row-ID."""
+    return StreamingResponse(
+        stream_narration(characters.iloc[a].to_dict(), characters.iloc[b].to_dict()),
+        media_type="text/plain"
+    )
+
+
+@app.post("/narrate")
+def narrate_custom(payload: dict = Body(...)):
+    """Streams narration for two full fighter objects (roster or custom)."""
+    return StreamingResponse(
+        stream_narration(payload["a"], payload["b"]),
+        media_type="text/plain"
+    )
 
 
 def predict_matchup():
@@ -237,7 +297,7 @@ def predict_matchup():
         print(f"  {f['feature']:<30} {f['value']:>+.3f}  (favors {f['favors']})")
 
     print("\nAnalysis:\n  ", end="", flush=True)
-    for token in narrate_stream(char_a.name, char_b.name):
+    for token in stream_narration(char_a.to_dict(), char_b.to_dict()):
         print(token, end="", flush=True)
     print()
 

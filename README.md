@@ -1,4 +1,4 @@
-# ⚔️ Anime Versus ML
+# Anime Versus ML
 
 **A machine-learning engine that predicts the winner of cross-universe anime 1v1 death battles — and explains *why* it made the call.**
 
@@ -80,6 +80,19 @@ To stop the LLM from hallucinating tropes, each character carries a hand-vetted 
 
 ---
 
+## Custom fighters
+
+Either side of a matchup can be a fighter you build yourself — click the **"?" card** at the end of the roster:
+
+1. Look the character up on the [VS Battles Wiki](https://vsbattles.fandom.com/wiki/VS_Battles_Wiki). Their profile lists the exact wording the builder uses — Tier / Attack Potency, Speed, Durability, Striking Strength, Lifting Strength, Intelligence, Stamina.
+2. Select the matching word-tier from each dropdown ("Planet level", "Massively FTL+", ...). The UI converts the wording to the model's numeric scale using the same log10-midpoint rubric in [`POWER_SCALE.md`](POWER_SCALE.md), so custom fighters land on the exact distribution the model trained on.
+3. Hit **Autofill Abilities** — an LLM scores the eight subjective ability/hax stats (durability negation, regeneration, soul hax, resistances, ...) from the name and form, mirroring how the original roster was scored. Every score stays editable if you disagree.
+4. Optionally write a short canon-mechanics note; the narration model uses it to ground the fight story.
+
+The custom fighter then runs through the identical prediction, SHAP, and narration pipeline as any roster character.
+
+---
+
 ## Stack & architecture
 
 ```
@@ -137,7 +150,7 @@ POWER_SCALE.md     numerical scaling methodology
 DEVELOPMENT_LOG.md day-by-day build journal
 ```
 
-📓 The full build story — every decision, dead end, and fix — is in [`DEVELOPMENT_LOG.md`](DEVELOPMENT_LOG.md), with the scaling math in [`POWER_SCALE.md`](POWER_SCALE.md).
+The full build story — every decision, dead end, and fix — is in [`DEVELOPMENT_LOG.md`](DEVELOPMENT_LOG.md), with the scaling math in [`POWER_SCALE.md`](POWER_SCALE.md).
 
 ---
 

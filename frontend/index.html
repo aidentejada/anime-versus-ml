@@ -295,6 +295,142 @@
   }
   .profile .notes b { display:block; margin-bottom: 2px; font-size: 11px; letter-spacing: 1px; }
 
+  /* ============ CUSTOM FIGHTER ============ */
+  .qtile {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    background:
+      repeating-conic-gradient(rgba(255,255,255,.05) 0% 25%, transparent 0% 50%) 0 0 / 16px 16px,
+      #241d33;
+  }
+  .qtile svg.sil { width: 82%; height: 82%; fill: #000; }
+  .qtile .qmark {
+    position: absolute;
+    top: 46%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 24px;
+    color: var(--gold);
+    text-shadow: 3px 3px 0 #000;
+  }
+  .big.qm {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    background:
+      repeating-conic-gradient(rgba(255,255,255,.04) 0% 25%, transparent 0% 50%) 0 0 / 16px 16px,
+      #241d33;
+    border: 3px solid #000;
+  }
+  .big.qm svg.sil { width: 72%; height: 88%; fill: #000; }
+  .big.qm .qmark {
+    position: absolute;
+    top: 44%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 52px;
+    color: var(--gold);
+    text-shadow: 4px 4px 0 #000;
+  }
+
+  .builder { display: none; max-width: 470px; margin: 0 auto; animation: pop .18s steps(3); }
+  .builder .frame {
+    border: 4px solid var(--gold);
+    box-shadow: 0 0 0 4px #000, 8px 8px 0 4px rgba(0,0,0,.55);
+    background: var(--bg2);
+    padding: 14px;
+  }
+  #sideA .builder .frame { border-color: var(--red); }
+  #sideB .builder .frame { border-color: var(--blue); }
+  .builder h3 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    text-shadow: 2px 2px 0 #000;
+    margin-bottom: 10px;
+  }
+  .builder .guide {
+    background: var(--paper);
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    box-shadow: 3px 3px 0 rgba(0,0,0,.6);
+    padding: 8px 10px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .builder .guide b { display: block; font-size: 11px; letter-spacing: 1px; margin-bottom: 3px; }
+  .builder .guide a { color: var(--red-dk); font-weight: bold; }
+  .builder label {
+    display: block;
+    font-size: 12px;
+    color: var(--grey);
+    margin: 8px 0 3px;
+    letter-spacing: 1px;
+  }
+  .builder input[type="text"], .builder select, .builder textarea, .builder input[type="number"] {
+    width: 100%;
+    background: #141020;
+    color: var(--white);
+    border: 2px solid #4a4258;
+    padding: 6px 8px;
+    font-family: 'DotGothic16', monospace;
+    font-size: 13px;
+  }
+  .builder input:focus, .builder select:focus, .builder textarea:focus { outline: 2px solid var(--gold); }
+  .builder .statGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+  .builder .haxGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+  .builder textarea { resize: vertical; min-height: 56px; }
+  .builder .secHead {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    color: var(--gold);
+    margin: 14px 0 2px;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #38304a;
+    padding-bottom: 4px;
+  }
+  .aiBtn {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    padding: 10px;
+    cursor: pointer;
+    color: var(--ink);
+    background: var(--gold);
+    border: 3px solid #a8842f;
+    box-shadow: 0 3px 0 #000;
+  }
+  .aiBtn:hover { background: #ffe08f; }
+  .aiBtn:active { transform: translateY(2px); box-shadow: none; }
+  .aiBtn:disabled { background: #6a6180; color: #2a2438; cursor: wait; }
+  .builder .msg { font-size: 12px; color: #ff97a1; min-height: 15px; margin-top: 5px; }
+  .confirmBtn {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11px;
+    padding: 12px;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(180deg, var(--red) 0%, var(--red-dk) 100%);
+    border: 3px solid var(--gold);
+    box-shadow: 0 3px 0 #000;
+  }
+  #sideB .confirmBtn { background: linear-gradient(180deg, var(--blue) 0%, var(--blue-dk) 100%); }
+  .confirmBtn:active { transform: translateY(2px); box-shadow: none; }
+
   .backBtn {
     display: block;
     width: 100%;
@@ -534,6 +670,7 @@
   <section class="side" id="sideA">
     <h2>PLAYER A<span class="jp">プレイヤーA　選択せよ</span></h2>
     <div class="roster" id="rosterA"></div>
+    <div class="builder" id="builderA"></div>
     <div class="profile" id="profileA"></div>
   </section>
 
@@ -542,6 +679,7 @@
   <section class="side" id="sideB">
     <h2>PLAYER B<span class="jp">プレイヤーB　選択せよ</span></h2>
     <div class="roster" id="rosterB"></div>
+    <div class="builder" id="builderB"></div>
     <div class="profile" id="profileB"></div>
   </section>
 </div>
@@ -701,6 +839,7 @@ function renderRoster(side){
     d.onclick = () => select(side, c);
     d.addEventListener("mouseenter", () => {
       const tip = d.querySelector(".tip");
+      if (!tip) return;
       tip.style.marginLeft = "0px";
       tip.style.top = "";
       tip.style.transform = "";
@@ -716,19 +855,188 @@ function renderRoster(side){
     });
     el.appendChild(d);
   });
+
+  // custom fighter card at the very end of the list
+  const q = document.createElement("div");
+  q.className = "card";
+  q.innerHTML = `<div class="qtile">?</div><span class="nm">CREATE FIGHTER</span>`;
+  q.onclick = () => openBuilder(side);
+  el.appendChild(q);
+}
+
+/* ---------------- custom fighter builder ---------------- */
+/* word-tier -> numeric value, straight from POWER_SCALE.md (log10 midpoints) */
+const AP_TIERS = [
+  ["Below Average Human",0.89],["Human level",1.90],["Athlete level",2.25],["Street level",3.33],
+  ["Wall level",5.75],["Small Building level",8.17],["Building level",9.47],["Large Building level",10.29],
+  ["City Block level",11.14],["Multi-City Block level",12.12],["Small Town level",13.00],["Town level",14.00],
+  ["Large Town level",15.12],["Small City level",16.02],["City level",17.02],["Mountain level",18.12],
+  ["Large Mountain level",18.94],["Island level",19.94],["Large Island level",21.12],["Small Country level",22.04],
+  ["Country level",23.04],["Large Country level",24.06],["Continent level",24.89],["Multi-Continent level",27.18],
+  ["Moon level",29.68],["Small Planet level",31.33],["Planet level",33.30],["Large Planet level",36.02],
+  ["Brown Dwarf level",39.17],["Small Star level",41.13],["Star level",42.13],["Large Star level",43.98],
+  ["Solar System level",51.38],["Multi-Solar System level",61.66],["Galaxy level",67.48],["Multi-Galaxy level",80.69],
+  ["Universe level",93.95],["High Universe level",94.50],["Universe level+",95.45],["Low Multiverse level",96.00],
+  ["Multiverse level",96.50],["Multiverse level+",97.00],["Low Complex Multiverse level",97.50],
+  ["Complex Multiverse level",98.00],["High Complex Multiverse level",98.25],["Hyperverse level",98.50],
+  ["High Hyperverse level",98.75],["Low Outerverse level",99.00],["Outerverse level",99.25],
+  ["Outerverse level+",99.50],["High Outerverse level",99.75],["Infinite / Immeasurable",100.00]
+];
+const SPEED_TIERS = [
+  ["Immobile",0.00],["Below Average Human",0.35],["Average Human",0.79],["Athletic Human",0.89],
+  ["Peak Human",1.04],["Superhuman",1.33],["Subsonic",1.87],["Subsonic+",2.37],["Transonic",2.55],
+  ["Supersonic",2.76],["Supersonic+",3.07],["Hypersonic",3.37],["Hypersonic+",3.67],["High Hypersonic",4.07],
+  ["High Hypersonic+",4.37],["Massively Hypersonic",4.87],["Massively Hypersonic+",5.51],
+  ["Sub-Relativistic",7.33],["Sub-Relativistic+",7.52],["Relativistic",7.85],["Relativistic+",8.33],
+  ["Speed of Light",8.48],["FTL",8.93],["FTL+",9.93],["Massively FTL",10.93],["Massively FTL+",11.48],
+  ["Infinite / Immeasurable / Omnipresent",100.00]
+];
+const LIFT_TIERS = [
+  ["Below Average Human",0.85],["Average Human",1.80],["Above Average Human",1.99],["Athletic Human",2.22],
+  ["Peak Human",2.55],["Superhuman / Class 1",2.87],["Class 5",3.35],["Class 10",3.85],["Class 25",4.20],
+  ["Class 50",4.55],["Class 100",4.85],["Class K",5.35],["Class M",7.50],["Class G",10.50],["Class T",13.50],
+  ["Class P",16.50],["Class E",19.50],["Class Z",22.50],["Class Y",25.50],["Pre-Stellar",28.15],
+  ["Stellar",31.05],["Multi-Stellar",37.30],["Galactic",42.99],["Multi-Galactic",48.48],["Universal",53.18],
+  ["Infinite / Immeasurable",100.00]
+];
+const INT_TIERS = [
+  ["Mindless",1],["Instinctive",2],["Animalistic",3],["High Animalistic",4],["Below Average",5],
+  ["Average",6],["Above Average",7],["Gifted",8],["Genius",9],["Extraordinary Genius",10],
+  ["Supergenius",11],["Nigh-Omniscient",12],["Omniscient",100]
+];
+const STAM_TIERS = [
+  ["Below Average",1],["Average",2],["Athletic",3],["Peak Human",4],["Superhuman",5],["Infinite",100]
+];
+
+function tierOptions(tiers, def){
+  return tiers.map(([w, v]) =>
+    `<option value="${v}" ${w === def ? "selected" : ""}>${w} (${v})</option>`).join("");
+}
+
+function tierSelect(cls, label, tiers, def){
+  return `<div><label>${label}</label><select class="${cls}">${tierOptions(tiers, def)}</select></div>`;
+}
+
+function openBuilder(side){
+  document.getElementById("roster" + side).style.display = "none";
+  const b = document.getElementById("builder" + side);
+
+  const haxInputs = HAX_COLS.map(k => `
+    <div><label>${pretty(k)}</label>
+    <input type="number" class="hax-${k}" min="1" max="10" step="0.5" value="1.0"></div>`).join("");
+
+  b.innerHTML = `
+    <div class="frame">
+      <h3>CREATE FIGHTER 作成</h3>
+
+      <div class="guide">
+        <b>HOW TO SCALE YOUR FIGHTER</b>
+        1. Look them up on the <a href="https://vsbattles.fandom.com/wiki/VS_Battles_Wiki" target="_blank" rel="noopener">VS Battles Wiki</a>.<br>
+        2. Their profile lists the exact wording used below — Attack Potency, Speed, Durability, Striking / Lifting Strength, Intelligence, Stamina.<br>
+        3. Pick the matching tier from each dropdown (converted to the model's numeric scale automatically).<br>
+        4. Hit AUTOFILL and an AI scores the eight ability stats from the name + form — tweak them if you disagree.
+      </div>
+
+      <label>NAME</label><input type="text" class="f-name" placeholder="e.g. Saitama" maxlength="40">
+      <label>FORM / ERA / BUFF</label><input type="text" class="f-form" placeholder="e.g. Serious Punch" maxlength="40">
+      <label>ANIME / SERIES</label><input type="text" class="f-anime" placeholder="e.g. One Punch Man" maxlength="40">
+
+      <div class="secHead">PHYSICAL STATS (from the wiki)</div>
+      <div class="statGrid">
+        ${tierSelect("f-tier", "Tier / AP", AP_TIERS, "City level")}
+        ${tierSelect("f-attack", "Attack", AP_TIERS, "City level")}
+        ${tierSelect("f-durability", "Durability", AP_TIERS, "City level")}
+        ${tierSelect("f-striking_strength", "Striking Strength", AP_TIERS, "City level")}
+        ${tierSelect("f-speed", "Speed", SPEED_TIERS, "Supersonic")}
+        ${tierSelect("f-lifting_strength", "Lifting Strength", LIFT_TIERS, "Class 5")}
+        ${tierSelect("f-intelligence", "Intelligence", INT_TIERS, "Average")}
+        ${tierSelect("f-stamina", "Stamina", STAM_TIERS, "Superhuman")}
+      </div>
+
+      <div class="secHead">ABILITIES / HAX (1-10)</div>
+      <div class="haxGrid">${haxInputs}</div>
+      <button class="aiBtn">◆ AUTOFILL ABILITIES (AI)</button>
+      <div class="msg"></div>
+
+      <label>CANON MECHANICS NOTE (optional — grounds the fight narration)</label>
+      <textarea class="f-notes" maxlength="400" placeholder="How do they actually win/lose? e.g. 'One punch ends anything physical, but he has no answer to soul or spatial hax.'"></textarea>
+
+      <button class="confirmBtn">CONFIRM FIGHTER ⮕</button>
+      <button class="backBtn">◀ BACK 戻る</button>
+    </div>`;
+
+  const msg = b.querySelector(".msg");
+
+  b.querySelector(".aiBtn").onclick = async () => {
+    const name = b.querySelector(".f-name").value.trim();
+    if (!name){ msg.textContent = "Enter a name first — the AI scores from name + form."; return; }
+    const btn = b.querySelector(".aiBtn");
+    btn.disabled = true; btn.textContent = "SCORING..."; msg.textContent = "";
+    try {
+      const r = await fetch("/score_abilities", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          form: b.querySelector(".f-form").value.trim(),
+          anime: b.querySelector(".f-anime").value.trim()
+        })
+      });
+      const d = await r.json();
+      HAX_COLS.forEach(k => { b.querySelector(".hax-" + k).value = d.scores[k]; });
+      if (!d.ok) msg.textContent = "AI scoring failed — floors set, adjust manually. (" + d.error + ")";
+    } catch(e){
+      msg.textContent = "Request failed: " + e;
+    }
+    btn.disabled = false; btn.textContent = "◆ AUTOFILL ABILITIES (AI)";
+  };
+
+  b.querySelector(".confirmBtn").onclick = () => {
+    const gv = cls => parseFloat(b.querySelector("." + cls).value);
+    const fighter = {
+      name: b.querySelector(".f-name").value.trim() || "Custom Fighter",
+      "form / era / buff": b.querySelector(".f-form").value.trim() || "Custom",
+      anime: b.querySelector(".f-anime").value.trim() || "Original",
+      image_links: null,
+      custom: true,
+      notes: b.querySelector(".f-notes").value.trim() ||
+        "Custom fighter with no canon brief — judge strictly from the statistical profile provided.",
+      tier: gv("f-tier"), attack: gv("f-attack"), speed: gv("f-speed"),
+      durability: gv("f-durability"), intelligence: gv("f-intelligence"), stamina: gv("f-stamina"),
+      lifting_strength: gv("f-lifting_strength"), striking_strength: gv("f-striking_strength"),
+      ...Object.fromEntries(HAX_COLS.map(k => {
+        let v = parseFloat(b.querySelector(".hax-" + k).value);
+        if (isNaN(v)) v = 1.0;
+        return [k, Math.min(10, Math.max(1, v))];
+      }))
+    };
+    b.style.display = "none";
+    select(side, fighter);
+  };
+
+  b.querySelector(".backBtn").onclick = () => {
+    b.style.display = "none";
+    document.getElementById("roster" + side).style.display = "grid";
+  };
+
+  b.style.display = "block";
 }
 
 /* ---------------- selection / profile ---------------- */
 function select(side, c){
   sel[side] = c;
   document.getElementById("roster"+side).style.display = "none";
+  document.getElementById("builder"+side).style.display = "none";
   const p = document.getElementById("profile"+side);
   const rows = STAT_ORDER.map(col => `
       <div class="row"><span class="k">${pretty(col)}</span>
       <span class="v">${statWord(col, c[col])} <small>(${c[col]})</small></span></div>`).join("");
+  const portrait = c.image_links
+    ? `<img class="big" src="/imgs/${c.image_links}" alt="${c.name}">`
+    : `<div class="big qm">?</div>`;
   p.innerHTML = `
     <div class="frame">
-      <img class="big" src="/imgs/${c.image_links}" alt="${c.name}">
+      ${portrait}
       <h3>${c.name}</h3>
       <div class="sub">${c["form / era / buff"]} ・ ${c.anime}</div>
       <div class="stats">${rows}</div>
@@ -743,6 +1051,7 @@ function select(side, c){
 function deselect(side){
   sel[side] = null;
   document.getElementById("profile"+side).style.display = "none";
+  document.getElementById("builder"+side).style.display = "none";
   document.getElementById("roster"+side).style.display = "grid";
   updateFightBtn();
 }
@@ -921,10 +1230,14 @@ async function fight(){
   battle.scrollTop = 0;
   startFightAnim();
 
+  // full fighter objects -> POST endpoints (works identically for roster + custom fighters)
+  const payload = JSON.stringify({ a, b });
+  const postOpts = { method: "POST", headers: { "Content-Type": "application/json" }, body: payload };
+
   // 1) get the verdict data first (held back until the stream finishes)
   let result = null;
   try {
-    const r = await fetch(`/matchups?a=${a.id}&b=${b.id}`);
+    const r = await fetch("/matchups", postOpts);
     result = await r.json();
   } catch(e){
     streamText.textContent = "[failed to reach the arena: " + e + "]";
@@ -933,7 +1246,7 @@ async function fight(){
 
   // 2) stream the narration live, token by token
   try {
-    const resp = await fetch(`/narrate?a=${a.id}&b=${b.id}`);
+    const resp = await fetch("/narrate", postOpts);
     const reader = resp.body.getReader();
     const dec = new TextDecoder();
     while (true){
