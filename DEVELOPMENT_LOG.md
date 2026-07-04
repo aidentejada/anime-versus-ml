@@ -71,4 +71,4 @@ I wasn't going to let the time i spent manually collecting high-quality data go 
 
 ### Day Five: Fixing model,Fast API work. (*07/02/2026*)
 I came to the realization that the model training had leakage meaning out 91.55% score isn't very accurate. We doubled the training data from 2346 to 4692 rows, but when we train-test-split, the same matchups that are in the training data are also in the test data, which is the root of the leakage. I fixed this and started implementing Fast API for deployment.
-Entry:
+Entry: a
