@@ -29,8 +29,10 @@ from fastapi.staticfiles import StaticFiles
 app = FastAPI()
 app.mount("/imgs", StaticFiles(directory="../data/imgs"), name="imgs")
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 def home():
+    # HEAD support matters here: uptime monitors (UptimeRobot, etc.) default to HEAD
+    # requests to check liveness -- GET-only would 405 and get flagged as "down"
     return FileResponse("../frontend/index.html")
 
 dotenv.load_dotenv()
